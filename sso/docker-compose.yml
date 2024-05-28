@@ -1,0 +1,12 @@
+services:
+  mongodb:
+    image: mongo:latest
+    restart: unless-stopped
+    volumes:
+      - mongodb-data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: sso_easy_station
+    ports:
+      - 27017:27017
+volumes:
+  mongodb-data:
