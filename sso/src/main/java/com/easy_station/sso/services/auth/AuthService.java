@@ -1,6 +1,6 @@
-package com.easy_station.sso.services;
+package com.easy_station.sso.services.auth;
 
-import com.easy_station.sso.dto.AuthUserDTO;
+import com.easy_station.sso.domain.user.dto.AuthDTO;
 import com.easy_station.sso.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,13 +9,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AuthService implements UserDetailsService {
-
+public class AuthService {
     @Autowired
-    UserRepository repository;
+    SignInService signInService;
 
-    @Override
-    public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        return repository.findByLogin(login);
+    public String signIn(AuthDTO dto) {
+        return signInService.run(dto);
     }
 }

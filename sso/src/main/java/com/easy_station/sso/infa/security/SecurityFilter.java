@@ -1,7 +1,7 @@
 package com.easy_station.sso.infa.security;
 
 import com.easy_station.sso.repositories.UserRepository;
-import com.easy_station.sso.services.TokenService;
+import com.easy_station.sso.services.auth.TokenService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

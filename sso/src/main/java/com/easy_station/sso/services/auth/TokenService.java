@@ -1,4 +1,4 @@
-package com.easy_station.sso.services;
+package com.easy_station.sso.services.auth;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -21,13 +21,12 @@ public class TokenService {
 
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
-            String token = JWT.create()
+
+            return JWT.create()
                     .withIssuer("easy-station-sso")
                     .withSubject(user.getLogin())
                     .withExpiresAt(this.getExpirationData())
                     .sign(algorithm);
-
-            return token;
         } catch (JWTCreationException excpetion) {
            throw new RuntimeException("Error while generating token", excpetion);
         }
