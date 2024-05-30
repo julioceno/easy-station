@@ -1,6 +1,6 @@
 package com.easy_station.sso.services.user;
 
-import com.easy_station.sso.domain.user.dto.RegisterDTO;
+import com.easy_station.sso.dto.user.RegisterDTO;
 import com.easy_station.sso.domain.user.User;
 import com.easy_station.sso.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

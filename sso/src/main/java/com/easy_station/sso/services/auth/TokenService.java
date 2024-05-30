@@ -5,6 +5,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.easy_station.sso.domain.user.User;
+import com.easy_station.sso.exceptions.UnauthorizedException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -17,36 +18,33 @@ public class TokenService {
     @Value("${api.security.token.secret}")
     private String secret;
 
-    public String generateToken(User user) {
-
+    public String generateToken(User user){
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
-
             return JWT.create()
-                    .withIssuer("easy-station-sso")
+                    .withIssuer("login-auth-api")
                     .withSubject(user.getLogin())
-                    .withExpiresAt(this.getExpirationData())
+                    .withExpiresAt(this.generateExpirationDate())
                     .sign(algorithm);
-        } catch (JWTCreationException excpetion) {
-           throw new RuntimeException("Error while generating token", excpetion);
+        } catch (JWTCreationException exception){
+            throw new RuntimeException("Error while authenticating");
         }
     }
 
-    public String validateToken(String token) {
+    public String validateToken(String token){
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             return JWT.require(algorithm)
-                    .withIssuer("easy-station-sso")
+                    .withIssuer("login-auth-api")
                     .build()
                     .verify(token)
                     .getSubject();
-        }
-        catch (JWTVerificationException exception) {
+        } catch (JWTVerificationException exception) {
             return null;
         }
     }
 
-    private Instant getExpirationData() {
+    private Instant generateExpirationDate(){
         return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-03:00"));
     }
 }

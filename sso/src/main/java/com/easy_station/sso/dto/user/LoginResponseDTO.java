@@ -1,4 +1,4 @@
-package com.easy_station.sso.domain.user.dto;
+package com.easy_station.sso.dto.user;
 
 public record LoginResponseDTO(String token) {
 }

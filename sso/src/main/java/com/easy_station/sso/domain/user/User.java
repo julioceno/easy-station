@@ -1,5 +1,6 @@
 package com.easy_station.sso.domain.user;
 
+import com.easy_station.sso.enums.UserRoleEnum;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -20,9 +21,9 @@ public @Data  class User implements UserDetails {
     private String id;
     private String login;
     private String password;
-    private UserRole role;
+    private UserRoleEnum role;
 
-    public User(String login, String password, UserRole role) {
+    public User(String login, String password, UserRoleEnum role) {
         this.login = login;
         this.password = password;
         this.role = role;
@@ -30,7 +31,7 @@ public @Data  class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        Boolean isAdmin = role == UserRole.ADMIN;
+        boolean isAdmin = role == UserRoleEnum.ADMIN;
         if (isAdmin) {
             return List.of(
                     new SimpleGrantedAuthority("ROLE_ADMIN"),

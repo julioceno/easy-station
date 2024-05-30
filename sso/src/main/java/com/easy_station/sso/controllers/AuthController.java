@@ -1,7 +1,8 @@
 package com.easy_station.sso.controllers;
 
-import com.easy_station.sso.domain.user.dto.AuthDTO;
-import com.easy_station.sso.domain.user.dto.LoginResponseDTO;
+import com.easy_station.sso.dto.user.AuthDTO;
+import com.easy_station.sso.dto.user.LoginResponseDTO;
+import com.easy_station.sso.exceptions.NotFoundException;
 import com.easy_station.sso.services.auth.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,5 +19,4 @@ public class AuthController {
         String token = this.authService.signIn(dto);
         return ResponseEntity.ok(new LoginResponseDTO(token));
     }
-
 }

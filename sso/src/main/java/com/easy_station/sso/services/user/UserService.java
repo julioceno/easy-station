@@ -1,29 +1,23 @@
 package com.easy_station.sso.services.user;
 
-import com.easy_station.sso.domain.user.dto.RegisterDTO;
+import com.easy_station.sso.dto.user.RegisterDTO;
 import com.easy_station.sso.domain.user.User;
-import com.easy_station.sso.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.List;
+
+@AllArgsConstructor
 @Service
-public class UserService implements UserDetailsService {
-    @Autowired
-    UserRepository repository;
+public class UserService {
+    private final CreateUserService createUserService;
+    private final FindAllUsersService findAllUsersService;
 
-    @Autowired
-    CreateUserService createUserService;
-
-    @Override
-    public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        return repository.findByLogin(login);
+    public User create(RegisterDTO dto) {
+        return createUserService.run(dto);
     }
 
-    public User create(@RequestBody RegisterDTO dto) {
-        return createUserService.run(dto);
+    public List<User> findAll() {
+        return this.findAllUsersService.run();
     }
 }

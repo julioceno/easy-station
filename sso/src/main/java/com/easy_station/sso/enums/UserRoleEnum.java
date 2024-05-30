@@ -1,12 +1,12 @@
-package com.easy_station.sso.domain.user;
+package com.easy_station.sso.enums;
 
-public enum UserRole {
+public enum UserRoleEnum {
     ADMIN("admin"),
     USER("user");
 
     private String role;
 
-    UserRole(String role) {
+    UserRoleEnum(String role) {
         this.role = role;
     }
 
