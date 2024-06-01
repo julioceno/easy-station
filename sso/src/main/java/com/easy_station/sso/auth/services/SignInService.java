@@ -13,11 +13,11 @@ public class SignInService {
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private TokenService tokenService;
+    private CreateTokenService createTokenService;
 
     public String run(AuthDTO dto) {
         var usernamePassword = new UsernamePasswordAuthenticationToken(dto.login(), dto.password());
         var auth = this.authenticationManager.authenticate(usernamePassword);
-        return tokenService.generateToken((User) auth.getPrincipal());
+        return createTokenService.run((User) auth.getPrincipal());
     }
 }

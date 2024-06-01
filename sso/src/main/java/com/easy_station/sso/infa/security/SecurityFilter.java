@@ -1,8 +1,8 @@
 package com.easy_station.sso.infa.security;
 
+import com.easy_station.sso.auth.services.ValidateTokenService;
 import com.easy_station.sso.exceptions.UnauthorizedException;
 import com.easy_station.sso.users.UserRepository;
-import com.easy_station.sso.auth.services.TokenService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,7 +20,7 @@ import java.util.Collections;
 @Component
 public class SecurityFilter extends OncePerRequestFilter {
     @Autowired
-    TokenService tokenService;
+    ValidateTokenService validateTokenService;
 
     @Autowired
     UserRepository userRepository;
@@ -48,7 +48,7 @@ public class SecurityFilter extends OncePerRequestFilter {
 
     private String getLoginUserByToken(String token) {
         try {
-            return tokenService.validateToken(token);
+            return validateTokenService.run(token);
         } catch (UnauthorizedException error) {
             return null;
         }

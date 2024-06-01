@@ -1,15 +1,20 @@
 package com.easy_station.sso.auth.services;
 
 import com.easy_station.sso.users.dto.AuthDTO;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+@AllArgsConstructor
 @Service
 public class AuthService {
-    @Autowired
-    SignInService signInService;
+    private final SignInService signInService;
+    private final ValidateTokenService validateTokenService;
 
     public String signIn(AuthDTO dto) {
         return signInService.run(dto);
+    }
+
+    public String validateToken(String token) {
+        return validateTokenService.run(token);
     }
 }
