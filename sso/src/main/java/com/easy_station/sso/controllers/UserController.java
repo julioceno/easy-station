@@ -28,9 +28,21 @@ public class UserController {
         return ResponseEntity.ok(users);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<User> findOne(@PathVariable String id) {
+        User user = this.userService.findOne(id);
+        return ResponseEntity.ok(user);
+    }
+
     @PatchMapping("/{id}")
     public ResponseEntity<User> update(@PathVariable String id, @RequestBody UpdateUserDTO dto) {
         User user = this.userService.update(id, dto);
         return ResponseEntity.ok(user);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable String id) {
+        userService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }

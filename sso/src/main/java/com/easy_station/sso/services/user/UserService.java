@@ -13,7 +13,9 @@ import java.util.List;
 public class UserService {
     private final CreateUserService createUserService;
     private final FindAllUsersService findAllUsersService;
+    private final FindOneUserService findOneUserService;
     private final UpdateUserService updateUserService;
+    private final DeleteUserService deleteUserService;
 
     public User create(CreateUserDTO dto) {
         return createUserService.run(dto);
@@ -23,7 +25,15 @@ public class UserService {
         return findAllUsersService.run();
     }
 
+    public User findOne(String id) {
+        return findOneUserService.run(id);
+    }
+
     public User update(String id, UpdateUserDTO dto) {
         return updateUserService.run(id, dto);
+    }
+
+    public void delete(String id) {
+        deleteUserService.run(id);
     }
 }
