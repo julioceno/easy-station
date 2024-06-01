@@ -35,8 +35,9 @@ public class SecurityConfiguration {
 
     private void authorizeHttpRequests(AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry authorize) {
         authorize
-            .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
-            .anyRequest().authenticated();
+                .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
+                .requestMatchers(HttpMethod.POST, "/auth/refreshToken").permitAll()
+                .anyRequest().authenticated();
     }
 
     @Bean

@@ -1,5 +1,6 @@
 package com.easy_station.sso.auth;
 
+import com.easy_station.sso.auth.dto.RefreshTokenDTO;
 import com.easy_station.sso.auth.dto.SignInDTO;
 import com.easy_station.sso.users.dto.AuthDTO;
 import com.easy_station.sso.auth.services.AuthService;
@@ -16,6 +17,12 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<SignInDTO> auth(@RequestBody AuthDTO dto) {
         SignInDTO signInDTO = this.authService.signIn(dto);
+        return ResponseEntity.ok(signInDTO);
+    }
+
+    @PostMapping("/refreshToken")
+    public ResponseEntity<SignInDTO> refreshToken(@RequestBody RefreshTokenDTO dto) {
+        SignInDTO signInDTO = this.authService.refreshToken(dto);
         return ResponseEntity.ok(signInDTO);
     }
 }

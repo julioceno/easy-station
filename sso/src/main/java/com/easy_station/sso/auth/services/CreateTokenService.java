@@ -9,9 +9,8 @@ import com.easy_station.sso.users.domain.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
 import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 
 @Service
 public class CreateTokenService {
@@ -32,9 +31,9 @@ public class CreateTokenService {
     }
 
     private Instant generateExpirationDate(){
-        return LocalDateTime.now()
-                .plusHours(1)
-                .toInstant(ZoneOffset.of("-03:00"));
+        return Instant
+                .now()
+                .plus(Duration.ofMinutes(30));
     }
 
 }
