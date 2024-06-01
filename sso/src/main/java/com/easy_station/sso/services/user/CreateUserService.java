@@ -1,19 +1,18 @@
 package com.easy_station.sso.services.user;
 
-import com.easy_station.sso.dto.user.RegisterDTO;
+import com.easy_station.sso.dto.user.CreateUserDTO;
 import com.easy_station.sso.domain.user.User;
 import com.easy_station.sso.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Service
 public class CreateUserService {
     @Autowired
     UserRepository repository;
 
-    public User run(@RequestBody RegisterDTO dto) {
+    public User run(CreateUserDTO dto) {
         boolean alreadyExistsUser = this.repository.findByLogin(dto.login()) != null;
         if (alreadyExistsUser) {
             return null;

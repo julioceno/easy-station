@@ -22,7 +22,7 @@ public class TokenService {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             return JWT.create()
-                    .withIssuer("login-auth-api")
+                    .withIssuer("easy-station-sso")
                     .withSubject(user.getLogin())
                     .withExpiresAt(this.generateExpirationDate())
                     .sign(algorithm);
@@ -35,12 +35,12 @@ public class TokenService {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             return JWT.require(algorithm)
-                    .withIssuer("login-auth-api")
+                    .withIssuer("easy-station-sso")
                     .build()
                     .verify(token)
                     .getSubject();
         } catch (JWTVerificationException exception) {
-            return null;
+            throw new UnauthorizedException("Usuário não está autenticado.");
         }
     }
 
