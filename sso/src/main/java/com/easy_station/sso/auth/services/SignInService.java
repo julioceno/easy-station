@@ -1,5 +1,6 @@
 package com.easy_station.sso.auth.services;
 
+import com.easy_station.sso.auth.dto.SignInDTO;
 import com.easy_station.sso.users.dto.AuthDTO;
 import com.easy_station.sso.users.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ public class SignInService {
     @Autowired
     private CreateTokenService createTokenService;
 
-    public String run(AuthDTO dto) {
+    public SignInDTO run(AuthDTO dto) {
         var usernamePassword = new UsernamePasswordAuthenticationToken(dto.login(), dto.password());
         var auth = this.authenticationManager.authenticate(usernamePassword);
         return createTokenService.run((User) auth.getPrincipal());
