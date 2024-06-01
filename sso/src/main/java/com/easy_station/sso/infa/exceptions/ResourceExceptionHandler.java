@@ -1,5 +1,6 @@
 package com.easy_station.sso.infa.exceptions;
 
+import com.easy_station.sso.exceptions.BadRequestException;
 import com.easy_station.sso.exceptions.NotFoundException;
 import com.easy_station.sso.exceptions.UnauthorizedException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -32,6 +33,29 @@ public class ResourceExceptionHandler {
         String error = "Unauthorized";
         HttpStatus status = HttpStatus.UNAUTHORIZED;
         StandardError err = new StandardError(Instant.now(), status.value(), error, e.getMessage(), request.getRequestURI());
+        return ResponseEntity.status(status).body(err);
+    }
+
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity<StandardError> badRequest(
+            UnauthorizedException e,
+            HttpServletRequest request
+    ) {
+        String error = "Bad Request";
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        StandardError err = new StandardError(Instant.now(), status.value(), error, e.getMessage(), request.getRequestURI());
+        return ResponseEntity.status(status).body(err);
+    }
+
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<StandardError> internalServerError(
+            UnauthorizedException e,
+            HttpServletRequest request
+    ) {
+        String error = "Internal Server Error";
+        HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+        String message = "Ocorreu um erro inesperado, entre em contato com o suporte.";
+        StandardError err = new StandardError(Instant.now(), status.value(), error, message, request.getRequestURI());
         return ResponseEntity.status(status).body(err);
     }
 }

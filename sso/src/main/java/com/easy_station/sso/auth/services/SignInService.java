@@ -3,22 +3,30 @@ package com.easy_station.sso.auth.services;
 import com.easy_station.sso.auth.dto.SignInDTO;
 import com.easy_station.sso.users.dto.AuthDTO;
 import com.easy_station.sso.users.domain.User;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 
 @Service
+@AllArgsConstructor
 public class SignInService {
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
-    private CreateTokenService createTokenService;
+    private final AuthenticationManager authenticationManager;
+    private final CreateTokenService createTokenService;
+    private final CreateRefreshTokenService createRefreshTokenService;
 
     public SignInDTO run(AuthDTO dto) {
         var usernamePassword = new UsernamePasswordAuthenticationToken(dto.login(), dto.password());
-        var auth = this.authenticationManager.authenticate(usernamePassword);
-        return createTokenService.run((User) auth.getPrincipal());
+        var auth = authenticationManager.authenticate(usernamePassword);
+        User user = (User) auth.getPrincipal();
+
+        String token = createTokenService.run(user);
+        String refreshToken = createRefreshTokenService.run(user.getId());
+
+        return SignInDTO
+                .builder()
+                .token(token)
+                .refreshToken(refreshToken)
+                .build();
     }
 }
