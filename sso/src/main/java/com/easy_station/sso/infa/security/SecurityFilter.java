@@ -1,8 +1,8 @@
 package com.easy_station.sso.infa.security;
 
 import com.easy_station.sso.exceptions.UnauthorizedException;
-import com.easy_station.sso.repositories.UserRepository;
-import com.easy_station.sso.services.auth.TokenService;
+import com.easy_station.sso.users.UserRepository;
+import com.easy_station.sso.auth.services.TokenService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

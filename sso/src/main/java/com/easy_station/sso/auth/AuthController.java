@@ -1,9 +1,8 @@
-package com.easy_station.sso.controllers;
+package com.easy_station.sso.auth;
 
-import com.easy_station.sso.dto.user.AuthDTO;
-import com.easy_station.sso.dto.user.LoginResponseDTO;
-import com.easy_station.sso.exceptions.NotFoundException;
-import com.easy_station.sso.services.auth.AuthService;
+import com.easy_station.sso.users.dto.AuthDTO;
+import com.easy_station.sso.users.dto.LoginResponseDTO;
+import com.easy_station.sso.auth.services.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

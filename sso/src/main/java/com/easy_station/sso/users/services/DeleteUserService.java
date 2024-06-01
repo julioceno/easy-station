@@ -1,9 +1,7 @@
-package com.easy_station.sso.services.user;
+package com.easy_station.sso.users.services;
 
-import com.easy_station.sso.domain.user.User;
 import com.easy_station.sso.exceptions.NotFoundException;
-import com.easy_station.sso.repositories.UserRepository;
-import org.bson.types.ObjectId;
+import com.easy_station.sso.users.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

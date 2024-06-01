@@ -1,8 +1,8 @@
 package com.easy_station.sso.infa.security;
 
-import com.easy_station.sso.domain.user.User;
+import com.easy_station.sso.users.domain.User;
 import com.easy_station.sso.exceptions.NotFoundException;
-import com.easy_station.sso.repositories.UserRepository;
+import com.easy_station.sso.users.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

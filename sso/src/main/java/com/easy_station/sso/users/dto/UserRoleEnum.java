@@ -1,4 +1,4 @@
-package com.easy_station.sso.enums;
+package com.easy_station.sso.users.dto;
 
 public enum UserRoleEnum {
     ADMIN("admin"),

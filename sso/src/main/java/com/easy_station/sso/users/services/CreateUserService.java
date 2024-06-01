@@ -1,8 +1,9 @@
-package com.easy_station.sso.services.user;
+package com.easy_station.sso.users.services;
 
-import com.easy_station.sso.dto.user.CreateUserDTO;
-import com.easy_station.sso.domain.user.User;
-import com.easy_station.sso.repositories.UserRepository;
+import com.easy_station.sso.users.dto.CreateUserDTO;
+import com.easy_station.sso.users.domain.User;
+import com.easy_station.sso.users.UserRepository;
+import com.easy_station.sso.users.dto.UserReturnDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -12,7 +13,7 @@ public class CreateUserService {
     @Autowired
     UserRepository repository;
 
-    public User run(CreateUserDTO dto) {
+    public UserReturnDTO run(CreateUserDTO dto) {
         boolean alreadyExistsUser = this.repository.findByLogin(dto.login()) != null;
         if (alreadyExistsUser) {
             return null;
@@ -22,6 +23,6 @@ public class CreateUserService {
         User newUser = new User(dto.login(), encyptedPassword, dto.role());
         this.repository.save(newUser);
 
-        return newUser;
+        return new UserReturnDTO(newUser);
     }
 }

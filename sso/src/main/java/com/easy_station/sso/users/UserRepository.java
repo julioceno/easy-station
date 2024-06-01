@@ -1,6 +1,6 @@
-package com.easy_station.sso.repositories;
+package com.easy_station.sso.users;
 
-import com.easy_station.sso.domain.user.User;
+import com.easy_station.sso.users.domain.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

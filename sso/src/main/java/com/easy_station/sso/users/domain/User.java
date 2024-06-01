@@ -1,6 +1,6 @@
-package com.easy_station.sso.domain.user;
+package com.easy_station.sso.users.domain;
 
-import com.easy_station.sso.enums.UserRoleEnum;
+import com.easy_station.sso.users.dto.UserRoleEnum;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

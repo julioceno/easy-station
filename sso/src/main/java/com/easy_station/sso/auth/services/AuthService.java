@@ -1,6 +1,6 @@
-package com.easy_station.sso.services.auth;
+package com.easy_station.sso.auth.services;
 
-import com.easy_station.sso.dto.user.AuthDTO;
+import com.easy_station.sso.users.dto.AuthDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

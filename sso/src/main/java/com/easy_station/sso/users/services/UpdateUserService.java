@@ -1,9 +1,10 @@
-package com.easy_station.sso.services.user;
+package com.easy_station.sso.users.services;
 
-import com.easy_station.sso.domain.user.User;
-import com.easy_station.sso.dto.user.UpdateUserDTO;
+import com.easy_station.sso.users.domain.User;
+import com.easy_station.sso.users.dto.UpdateUserDTO;
 import com.easy_station.sso.exceptions.NotFoundException;
-import com.easy_station.sso.repositories.UserRepository;
+import com.easy_station.sso.users.UserRepository;
+import com.easy_station.sso.users.dto.UserReturnDTO;
 import com.easy_station.sso.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,9 +14,11 @@ public class UpdateUserService {
     @Autowired
     UserRepository repository;
 
-    public User run(String id, UpdateUserDTO dto) {
+    public UserReturnDTO run(String id, UpdateUserDTO dto) {
         User currentUser = this.getUser(id);
-        return updateUser(currentUser, dto);
+        User userUpdated = updateUser(currentUser, dto);
+
+        return new UserReturnDTO(userUpdated);
     }
 
     private User getUser(String id) {

@@ -1,8 +1,9 @@
-package com.easy_station.sso.services.user;
+package com.easy_station.sso.users.services;
 
-import com.easy_station.sso.dto.user.CreateUserDTO;
-import com.easy_station.sso.domain.user.User;
-import com.easy_station.sso.dto.user.UpdateUserDTO;
+import com.easy_station.sso.users.dto.CreateUserDTO;
+import com.easy_station.sso.users.domain.User;
+import com.easy_station.sso.users.dto.UpdateUserDTO;
+import com.easy_station.sso.users.dto.UserReturnDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,19 +18,19 @@ public class UserService {
     private final UpdateUserService updateUserService;
     private final DeleteUserService deleteUserService;
 
-    public User create(CreateUserDTO dto) {
+    public UserReturnDTO create(CreateUserDTO dto) {
         return createUserService.run(dto);
     }
 
-    public List<User> findAll() {
+    public List<UserReturnDTO> findAll() {
         return findAllUsersService.run();
     }
 
-    public User findOne(String id) {
+    public UserReturnDTO findOne(String id) {
         return findOneUserService.run(id);
     }
 
-    public User update(String id, UpdateUserDTO dto) {
+    public UserReturnDTO update(String id, UpdateUserDTO dto) {
         return updateUserService.run(id, dto);
     }
 
