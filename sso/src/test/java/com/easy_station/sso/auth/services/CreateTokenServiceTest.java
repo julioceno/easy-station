@@ -6,6 +6,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.easy_station.sso.exceptions.UnauthorizedException;
 import com.easy_station.sso.users.domain.User;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -28,6 +29,12 @@ class CreateTokenServiceTest {
     @Mock
     private User user;
 
+    @BeforeAll
+    static void setUpBeforeAll() {
+        mockStatic(JWT.class);
+    }
+
+
     @BeforeEach
     void setUp() {
         ReflectionTestUtils.setField(createTokenService, "secret", "jwtSecret");
@@ -44,7 +51,6 @@ class CreateTokenServiceTest {
         when(jwtBuilder.withExpiresAt((Instant) any())).thenReturn(jwtBuilder);
         when(jwtBuilder.sign(any(Algorithm.class))).thenReturn("token-jwt");
 
-        mockStatic(JWT.class);
         when(JWT.create()).thenReturn(jwtBuilder);
 
         String token = createTokenService.run(user);
@@ -55,7 +61,6 @@ class CreateTokenServiceTest {
     @Test
     @DisplayName("Should throw error when ocurred error in create token")
     void test2() {
-        mockStatic(JWT.class);
         when(JWT.create()).thenThrow(new JWTCreationException("error", null));
 
         UnauthorizedException exception = assertThrows(UnauthorizedException.class, () -> {
