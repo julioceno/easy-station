@@ -2,13 +2,11 @@ package com.easy_station.sso.auth.services;
 
 import com.easy_station.sso.auth.RefreshTokenRepository;
 import com.easy_station.sso.auth.domain.RefreshToken;
-import com.easy_station.sso.exceptions.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
 import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 
 @Service
 public class CreateRefreshTokenService {
@@ -32,8 +30,8 @@ public class CreateRefreshTokenService {
     }
 
     private Instant generateExpirationDate(){
-        return LocalDateTime.now()
-                .plusHours(8)
-                .toInstant(ZoneOffset.of("-03:00"));
+        return Instant
+                .now()
+                .plus(Duration.ofMinutes(30));
     }
 }
