@@ -6,12 +6,12 @@ import lombok.Getter;
 @Getter
 public class UserReturnDTO {
     private String id;
-    private String login;
+    private String email;
     private UserRoleEnum role;
 
     public UserReturnDTO(User user) {
         this.id = user.getId();
-        this.login = user.getLogin();
+        this.email = user.getEmail();
         this.role = user.getRole();
     }
 }

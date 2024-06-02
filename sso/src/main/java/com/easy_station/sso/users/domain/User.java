@@ -16,15 +16,23 @@ import java.util.List;
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 public @Data  class User implements UserDetails {
-
     @Id
     private String id;
-    private String login;
+    private String email;
     private String password;
     private UserRoleEnum role;
 
-    public User(String login, String password, UserRoleEnum role) {
-        this.login = login;
+    private CompanyDTO company;
+
+    public User(String id, String email, String password, UserRoleEnum role) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
+
+    public User(String email, String password, UserRoleEnum role) {
+        this.email = email;
         this.password = password;
         this.role = role;
     }
@@ -49,26 +57,6 @@ public @Data  class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return login;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
+        return email;
     }
 }

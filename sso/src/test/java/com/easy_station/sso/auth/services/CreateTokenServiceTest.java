@@ -43,7 +43,7 @@ class CreateTokenServiceTest {
     @Test
     @DisplayName("Should return token when user is valid")
     void test1() {
-        when(user.getLogin()).thenReturn("testUser");
+        when(user.getEmail()).thenReturn("testUser");
 
         JWTCreator.Builder jwtBuilder = mock(JWTCreator.Builder.class);
         when(jwtBuilder.withIssuer(anyString())).thenReturn(jwtBuilder);

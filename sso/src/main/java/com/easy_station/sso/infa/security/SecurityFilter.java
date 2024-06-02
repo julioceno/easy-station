@@ -31,7 +31,7 @@ public class SecurityFilter extends OncePerRequestFilter {
         var login = getLoginUserByToken(token);
 
         if (login != null) {
-            var user = userRepository.findByLogin(login);
+            var user = userRepository.findByEmail(login);
             var authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
             var authentication = new UsernamePasswordAuthenticationToken(user, null,authorities);
             SecurityContextHolder.getContext().setAuthentication(authentication);

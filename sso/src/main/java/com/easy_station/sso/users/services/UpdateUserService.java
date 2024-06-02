@@ -9,10 +9,12 @@ import com.easy_station.sso.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import static java.lang.String.format;
+
 @Service
 public class UpdateUserService {
     @Autowired
-    UserRepository repository;
+    private UserRepository repository;
 
     public UserReturnDTO run(String id, UpdateUserDTO dto) {
         User currentUser = this.getUser(id);
@@ -24,7 +26,7 @@ public class UpdateUserService {
     private User getUser(String id) {
         User user = this.repository.findById(id).orElse(null);
         if (user == null) {
-            throw new NotFoundException("Usuário de id " + id + " não existe.");
+            throw new NotFoundException(format("Usuário de id %s não existe", id));
         }
         return user;
     }

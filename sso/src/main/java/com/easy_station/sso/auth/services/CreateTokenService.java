@@ -22,7 +22,7 @@ public class CreateTokenService {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             return JWT.create()
                     .withIssuer("easy-station-sso")
-                    .withSubject(user.getLogin())
+                    .withSubject(user.getEmail())
                     .withExpiresAt(this.generateExpirationDate())
                     .sign(algorithm);
         } catch (JWTCreationException exception){
