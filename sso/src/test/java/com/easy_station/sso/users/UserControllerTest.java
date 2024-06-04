@@ -1,6 +1,8 @@
 package com.easy_station.sso.users;
 
+import com.easy_station.sso.auth.services.ValidateTokenService;
 import com.easy_station.sso.users.dto.CreateUserDTO;
+import com.easy_station.sso.users.dto.UpdatePasswordDTO;
 import com.easy_station.sso.users.dto.UpdateUserDTO;
 import com.easy_station.sso.users.dto.UserRoleEnum;
 import com.easy_station.sso.users.services.UserService;
@@ -20,6 +22,9 @@ class UserControllerTest {
 
     @Mock
     UserService userService;
+
+    @Mock
+    ValidateTokenService validateTokenService;
 
     @Test
     @DisplayName("Should call userService and invoke create method")
@@ -56,5 +61,15 @@ class UserControllerTest {
     void test5() {
         userController.delete("id");
         verify(userService).delete("id");
+    }
+
+    @Test
+    @DisplayName("Should call userService and invoke updatePassword method")
+    void test6() {
+        when(validateTokenService.run("")).thenReturn("");
+        UpdatePasswordDTO dto = new UpdatePasswordDTO("old", "new");
+
+        userController.updatePassword("", dto );
+        verify(userService).updatePassword("", dto);
     }
 }

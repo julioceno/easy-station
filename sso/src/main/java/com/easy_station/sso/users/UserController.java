@@ -41,8 +41,8 @@ public class UserController {
 
     @PatchMapping("/update-password")
     public ResponseEntity<UserReturnDTO> updatePassword(
-            @RequestBody UpdatePasswordDTO dto,
-            @RequestHeader("Authorization") String bearerToken
+            @RequestHeader("Authorization") String bearerToken,
+            @RequestBody UpdatePasswordDTO dto
     ) {
         String token = bearerToken.replace("Bearer ", "");
         String decodedToken = validateTokenService.run(token);

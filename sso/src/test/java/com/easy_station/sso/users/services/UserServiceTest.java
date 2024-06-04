@@ -1,6 +1,7 @@
 package com.easy_station.sso.users.services;
 
 import com.easy_station.sso.users.dto.CreateUserDTO;
+import com.easy_station.sso.users.dto.UpdatePasswordDTO;
 import com.easy_station.sso.users.dto.UpdateUserDTO;
 import com.easy_station.sso.users.dto.UserRoleEnum;
 import org.junit.jupiter.api.DisplayName;
@@ -31,6 +32,9 @@ class UserServiceTest {
 
     @Mock
     DeleteUserService deleteUserService;
+
+    @Mock
+    UpdatePasswordService updatePasswordService;
 
     @Test
     @DisplayName("Should call createUserService and invoke run method")
@@ -67,5 +71,13 @@ class UserServiceTest {
     void test5() {
         userService.delete("id");
         verify(deleteUserService).run("id");
+    }
+
+    @Test
+    @DisplayName("Should call updatePasswordService and invoke run method")
+    void test6() {
+        UpdatePasswordDTO dto = new UpdatePasswordDTO("old", "new");
+        userService.updatePassword("", dto);
+        verify(updatePasswordService).run("", dto);
     }
 }
