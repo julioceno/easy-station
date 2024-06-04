@@ -17,7 +17,8 @@ public class CreateUserService {
     UserRepository repository;
 
     public UserReturnDTO run(CreateUserDTO dto) {
-        boolean alreadyExistsUser = this.repository.findByEmail(dto.email()) != null;
+        User user = this.repository.findByEmail(dto.email()).orElse(null);
+        boolean alreadyExistsUser = user != null;
         if (alreadyExistsUser) {
             throw new BadRequestException(format("Email %s já esta em uso", dto.email()));
         }

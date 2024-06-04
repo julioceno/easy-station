@@ -1,5 +1,6 @@
 package com.easy_station.sso.users.domain;
 
+import com.easy_station.sso.users.dto.CompanyDTO;
 import com.easy_station.sso.users.dto.UserRoleEnum;
 import lombok.*;
 import org.springframework.data.annotation.Id;

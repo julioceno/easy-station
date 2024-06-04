@@ -1,6 +1,8 @@
 package com.easy_station.sso.users;
 
+import com.easy_station.sso.auth.services.ValidateTokenService;
 import com.easy_station.sso.users.dto.CreateUserDTO;
+import com.easy_station.sso.users.dto.UpdatePasswordDTO;
 import com.easy_station.sso.users.dto.UpdateUserDTO;
 import com.easy_station.sso.users.dto.UserReturnDTO;
 import com.easy_station.sso.users.services.UserService;
@@ -15,6 +17,9 @@ import java.util.List;
 public class UserController {
     @Autowired
     UserService userService;
+
+    @Autowired
+    ValidateTokenService validateTokenService;
 
     @PostMapping
     public ResponseEntity<UserReturnDTO> create(@RequestBody CreateUserDTO dto) {
@@ -31,6 +36,17 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<UserReturnDTO> findOne(@PathVariable String id) {
         UserReturnDTO user = this.userService.findOne(id);
+        return ResponseEntity.ok(user);
+    }
+
+    @PatchMapping("/update-password")
+    public ResponseEntity<UserReturnDTO> updatePassword(
+            @RequestBody UpdatePasswordDTO dto,
+            @RequestHeader("Authorization") String bearerToken
+    ) {
+        String token = bearerToken.replace("Bearer ", "");
+        String decodedToken = validateTokenService.run(token);
+        UserReturnDTO user = this.userService.updatePassword(decodedToken, dto);
         return ResponseEntity.ok(user);
     }
 

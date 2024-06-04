@@ -2,6 +2,7 @@ package com.easy_station.sso.users.services;
 
 import com.easy_station.sso.users.dto.CreateUserDTO;
 import com.easy_station.sso.users.domain.User;
+import com.easy_station.sso.users.dto.UpdatePasswordDTO;
 import com.easy_station.sso.users.dto.UpdateUserDTO;
 import com.easy_station.sso.users.dto.UserReturnDTO;
 import lombok.AllArgsConstructor;
@@ -17,6 +18,7 @@ public class UserService {
     private final FindOneUserService findOneUserService;
     private final UpdateUserService updateUserService;
     private final DeleteUserService deleteUserService;
+    private final UpdatePasswordService updatePasswordService;
 
     public UserReturnDTO create(CreateUserDTO dto) {
         return createUserService.run(dto);
@@ -32,6 +34,10 @@ public class UserService {
 
     public UserReturnDTO update(String id, UpdateUserDTO dto) {
         return updateUserService.run(id, dto);
+    }
+
+    public UserReturnDTO updatePassword(String email, UpdatePasswordDTO dto) {
+        return updatePasswordService.run(email, dto);
     }
 
     public void delete(String id) {

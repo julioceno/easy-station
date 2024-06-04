@@ -39,7 +39,7 @@ class SignInServiceTest {
     @DisplayName("Should return token and refresh token")
     void test1() {
         AuthDTO authDTO = new AuthDTO("username", "password");
-        UsernamePasswordAuthenticationToken usernamePassword = new UsernamePasswordAuthenticationToken(authDTO.login(), authDTO.password());
+        UsernamePasswordAuthenticationToken usernamePassword = new UsernamePasswordAuthenticationToken(authDTO.email(), authDTO.password());
 
         User user = mock(User.class);
         when(user.getId()).thenReturn("");
@@ -61,7 +61,7 @@ class SignInServiceTest {
     @DisplayName("Should call authenticationManager and invoke authenticate method")
     void test2() {
         AuthDTO authDTO = new AuthDTO("username", "password");
-        UsernamePasswordAuthenticationToken usernamePassword = new UsernamePasswordAuthenticationToken(authDTO.login(), authDTO.password());
+        UsernamePasswordAuthenticationToken usernamePassword = new UsernamePasswordAuthenticationToken(authDTO.email(), authDTO.password());
 
         User user = mock(User.class);
         Mockito.when(user.getId()).thenReturn("");
@@ -82,7 +82,7 @@ class SignInServiceTest {
     @DisplayName("Should call createTokenService and invoke run method")
     void test3() {
         AuthDTO authDTO = new AuthDTO("username", "password");
-        UsernamePasswordAuthenticationToken usernamePassword = new UsernamePasswordAuthenticationToken(authDTO.login(), authDTO.password());
+        UsernamePasswordAuthenticationToken usernamePassword = new UsernamePasswordAuthenticationToken(authDTO.email(), authDTO.password());
 
         User user = mock(User.class);
         Mockito.when(user.getId()).thenReturn("");
@@ -103,7 +103,7 @@ class SignInServiceTest {
     @DisplayName("Should call createTokenService and invoke run method")
     void test4() {
         AuthDTO authDTO = new AuthDTO("username", "password");
-        UsernamePasswordAuthenticationToken usernamePassword = new UsernamePasswordAuthenticationToken(authDTO.login(), authDTO.password());
+        UsernamePasswordAuthenticationToken usernamePassword = new UsernamePasswordAuthenticationToken(authDTO.email(), authDTO.password());
 
         User user = mock(User.class);
         Mockito.when(user.getId()).thenReturn("");

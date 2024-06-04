@@ -16,7 +16,7 @@ public class SignInService {
     private final CreateRefreshTokenService createRefreshTokenService;
 
     public SignInDTO run(AuthDTO dto) {
-        var usernamePassword = new UsernamePasswordAuthenticationToken(dto.login(), dto.password());
+        var usernamePassword = new UsernamePasswordAuthenticationToken(dto.email(), dto.password());
         var auth = authenticationManager.authenticate(usernamePassword);
         User user = (User) auth.getPrincipal();
 
