@@ -1,9 +1,6 @@
 package com.easy_station.sso.users.services;
 
-import com.easy_station.sso.users.dto.CreateUserDTO;
-import com.easy_station.sso.users.dto.UpdatePasswordDTO;
-import com.easy_station.sso.users.dto.UpdateUserDTO;
-import com.easy_station.sso.users.dto.UserRoleEnum;
+import com.easy_station.sso.users.dto.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -36,6 +33,9 @@ class UserServiceTest {
     @Mock
     UpdatePasswordService updatePasswordService;
 
+    @Mock
+    UpdateOwnUserService updateOwnUserService;
+
     @Test
     @DisplayName("Should call createUserService and invoke run method")
     void test1() {
@@ -61,7 +61,7 @@ class UserServiceTest {
     @Test
     @DisplayName("Should call updateUserService and invoke run method")
     void test4() {
-        UpdateUserDTO dto = new UpdateUserDTO("login", UserRoleEnum.ADMIN);
+        UpdateUserDTO dto = new UpdateUserDTO("login", UserRoleEnum.ADMIN, null);
         userService.update("id", dto);
         verify(updateUserService).run("id", dto);
     }
@@ -79,5 +79,13 @@ class UserServiceTest {
         UpdatePasswordDTO dto = new UpdatePasswordDTO("old", "new");
         userService.updatePassword("", dto);
         verify(updatePasswordService).run("", dto);
+    }
+
+    @Test
+    @DisplayName("Should call updateOwnUserService and invoke run method")
+    void test7() {
+        UpdateOwnUserDTO dto = new UpdateOwnUserDTO("login");
+        userService.updateOwn("", dto);
+        verify(updateOwnUserService).run("", dto);
     }
 }

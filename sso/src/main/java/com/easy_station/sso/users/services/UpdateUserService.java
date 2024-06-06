@@ -1,6 +1,7 @@
 package com.easy_station.sso.users.services;
 
 import com.easy_station.sso.users.domain.User;
+import com.easy_station.sso.users.dto.CompanyDTO;
 import com.easy_station.sso.users.dto.UpdateUserDTO;
 import com.easy_station.sso.exceptions.NotFoundException;
 import com.easy_station.sso.users.UserRepository;
@@ -33,6 +34,12 @@ public class UpdateUserService {
 
     private User updateUser(User user, UpdateUserDTO dto) {
         User userUpdated = Utils.copyNonNullProperties(dto, user);
+
+        if (dto.getCompany() != null) {
+            CompanyDTO companyUpdated =  Utils.copyNonNullProperties(dto.getCompany(), user.getCompany());
+            dto.setCompany(companyUpdated);
+        }
+
         repository.save(userUpdated);
         return user;
     }

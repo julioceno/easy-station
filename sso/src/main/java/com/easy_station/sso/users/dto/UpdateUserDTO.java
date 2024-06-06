@@ -1,3 +1,15 @@
 package com.easy_station.sso.users.dto;
 
-public record UpdateUserDTO(String email, UserRoleEnum role) {}
+
+import lombok.*;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@EqualsAndHashCode
+public class UpdateUserDTO {
+    private String email;
+    private UserRoleEnum role;
+    private CompanyDTO company;
+}

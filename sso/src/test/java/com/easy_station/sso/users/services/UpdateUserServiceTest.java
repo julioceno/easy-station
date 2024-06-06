@@ -31,7 +31,7 @@ class UpdateUserServiceTest {
     UserRepository userRepository;
 
     String id = "id";
-    UpdateUserDTO dto = new UpdateUserDTO("email", UserRoleEnum.ADMIN);
+    UpdateUserDTO dto = new UpdateUserDTO("email", UserRoleEnum.ADMIN, null);
     User user;
 
     @BeforeEach
@@ -73,7 +73,7 @@ class UpdateUserServiceTest {
     @DisplayName("Should call save method with prop email and rol updated")
     void test4() {
         User newUser = new User("id", "newEmail", "password", UserRoleEnum.USER);
-        UpdateUserDTO dto = new UpdateUserDTO("newEmail", UserRoleEnum.USER);
+        UpdateUserDTO dto = new UpdateUserDTO("newEmail", UserRoleEnum.USER, null);
 
         when(userRepository.findById(id)).thenReturn(Optional.ofNullable(user));
         updateUserService.run(id, dto);
@@ -89,5 +89,4 @@ class UpdateUserServiceTest {
 
         assertThat(response).isInstanceOf(UserReturnDTO.class);
     }
-
 }

@@ -1,10 +1,6 @@
 package com.easy_station.sso.users.services;
 
-import com.easy_station.sso.users.dto.CreateUserDTO;
-import com.easy_station.sso.users.domain.User;
-import com.easy_station.sso.users.dto.UpdatePasswordDTO;
-import com.easy_station.sso.users.dto.UpdateUserDTO;
-import com.easy_station.sso.users.dto.UserReturnDTO;
+import com.easy_station.sso.users.dto.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +15,7 @@ public class UserService {
     private final UpdateUserService updateUserService;
     private final DeleteUserService deleteUserService;
     private final UpdatePasswordService updatePasswordService;
+    private final UpdateOwnUserService updateOwnUserService;
 
     public UserReturnDTO create(CreateUserDTO dto) {
         return createUserService.run(dto);
@@ -34,6 +31,10 @@ public class UserService {
 
     public UserReturnDTO update(String id, UpdateUserDTO dto) {
         return updateUserService.run(id, dto);
+    }
+
+    public UserReturnDTO updateOwn(String id, UpdateOwnUserDTO dto) {
+        return updateOwnUserService.run(id, dto);
     }
 
     public UserReturnDTO updatePassword(String email, UpdatePasswordDTO dto) {

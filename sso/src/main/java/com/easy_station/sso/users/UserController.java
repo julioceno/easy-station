@@ -1,10 +1,7 @@
 package com.easy_station.sso.users;
 
 import com.easy_station.sso.auth.services.ValidateTokenService;
-import com.easy_station.sso.users.dto.CreateUserDTO;
-import com.easy_station.sso.users.dto.UpdatePasswordDTO;
-import com.easy_station.sso.users.dto.UpdateUserDTO;
-import com.easy_station.sso.users.dto.UserReturnDTO;
+import com.easy_station.sso.users.dto.*;
 import com.easy_station.sso.users.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -47,6 +44,17 @@ public class UserController {
         String token = bearerToken.replace("Bearer ", "");
         String decodedToken = validateTokenService.run(token);
         UserReturnDTO user = this.userService.updatePassword(decodedToken, dto);
+        return ResponseEntity.ok(user);
+    }
+
+    @PatchMapping("/")
+    public ResponseEntity<UserReturnDTO> updateOwnUser(
+            @RequestHeader("Authorization") String bearerToken,
+            @RequestBody UpdateOwnUserDTO dto
+    ) {
+        String token = bearerToken.replace("Bearer ", "");
+        String decodedToken = validateTokenService.run(token);
+        UserReturnDTO user = this.userService.updateOwn(decodedToken, dto);
         return ResponseEntity.ok(user);
     }
 

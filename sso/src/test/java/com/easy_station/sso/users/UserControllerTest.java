@@ -1,10 +1,7 @@
 package com.easy_station.sso.users;
 
 import com.easy_station.sso.auth.services.ValidateTokenService;
-import com.easy_station.sso.users.dto.CreateUserDTO;
-import com.easy_station.sso.users.dto.UpdatePasswordDTO;
-import com.easy_station.sso.users.dto.UpdateUserDTO;
-import com.easy_station.sso.users.dto.UserRoleEnum;
+import com.easy_station.sso.users.dto.*;
 import com.easy_station.sso.users.services.UserService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -51,7 +48,7 @@ class UserControllerTest {
     @Test
     @DisplayName("Should call userService and invoke update method")
     void test4() {
-        UpdateUserDTO dto = new UpdateUserDTO("login", UserRoleEnum.ADMIN);
+        UpdateUserDTO dto = new UpdateUserDTO("login", UserRoleEnum.ADMIN, null);
         userController.update("id", dto);
         verify(userService).update("id", dto);
     }
@@ -66,10 +63,20 @@ class UserControllerTest {
     @Test
     @DisplayName("Should call userService and invoke updatePassword method")
     void test6() {
-        when(validateTokenService.run("")).thenReturn("");
+        when(validateTokenService.run("token")).thenReturn("id");
         UpdatePasswordDTO dto = new UpdatePasswordDTO("old", "new");
 
-        userController.updatePassword("", dto );
-        verify(userService).updatePassword("", dto);
+        userController.updatePassword("token", dto );
+        verify(userService).updatePassword("id", dto);
+    }
+
+    @Test
+    @DisplayName("Should call userService and invoke updateOwnUser method")
+    void test7() {
+        when(validateTokenService.run("token")).thenReturn("id");
+        UpdateOwnUserDTO dto = new UpdateOwnUserDTO("email");
+
+        userController.updateOwnUser("token", dto );
+        verify(userService).updateOwn("id", dto);
     }
 }
