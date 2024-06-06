@@ -1,5 +1,6 @@
 package com.easy_station.sso.users.services;
 
+import com.easy_station.sso.users.domain.User;
 import com.easy_station.sso.users.dto.UpdateOwnUserDTO;
 import com.easy_station.sso.users.dto.UpdateUserDTO;
 import com.easy_station.sso.users.dto.UserReturnDTO;
@@ -9,10 +10,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class UpdateOwnUserService {
     @Autowired
-    private UpdateUserService updateUserService;
+    UpdateUserService updateUserService;
 
-    public UserReturnDTO run(String id, UpdateOwnUserDTO dto) {
+    @Autowired
+    private FindUserByEmailService findUserByEmailService;
+
+    public UserReturnDTO run(String email, UpdateOwnUserDTO dto) {
+        User user = findUserByEmailService.run(email);
+
         UpdateUserDTO updateUserDTO = new UpdateUserDTO(dto.email(), null, null);
-        return updateUserService.run(id, updateUserDTO);
+        return updateUserService.run(user.getId(), updateUserDTO);
     }
 }

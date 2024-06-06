@@ -15,10 +15,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import javax.swing.text.html.Option;
-
-import java.util.Optional;
-
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -36,6 +32,9 @@ class CreateUserServiceTest {
     @Mock
     UserRepository userRepository;
 
+    @Mock
+    FindUserByEmailService findUserByEmailService;
+
     BCryptPasswordEncoder passwordEncoder;
 
     User user;
@@ -48,18 +47,18 @@ class CreateUserServiceTest {
     }
 
     @Test
-    @DisplayName("Should call userRepository and invoke findByEmail")
+    @DisplayName("Should call findUserByEmailService and invoke run method")
     void test1() {
-        when(userRepository.findByEmail(dto.email())).thenReturn(null);
+        when(findUserByEmailService.run(dto.email())).thenReturn(null);
 
         createUserService.run(dto);
-        verify(userRepository).findByEmail(dto.email());
+        verify(findUserByEmailService).run(dto.email());
     }
 
     @Test
-    @DisplayName("Should throw BadRequestException when user not exists")
+    @DisplayName("Should throw BadRequestException when user exists")
     void test2() {
-        when(userRepository.findByEmail(dto.email())).thenReturn(Optional.ofNullable(user));
+        when(findUserByEmailService.run(dto.email())).thenReturn(user);
 
         BadRequestException exception = assertThrows(BadRequestException.class, () -> {
             createUserService.run(dto);
@@ -71,7 +70,7 @@ class CreateUserServiceTest {
     @Test
     @DisplayName("Should invoke userRepository and invoke save method")
     void test3() {
-        when(userRepository.findByEmail(dto.email())).thenReturn(null);
+        when(findUserByEmailService.run(dto.email())).thenReturn(null);
         createUserService.run(dto);
 
         verify(userRepository).save(any(User.class));
@@ -83,7 +82,7 @@ class CreateUserServiceTest {
     @Test
     @DisplayName("Should return user instance of UserReturnDTO")
     void test4() {
-        when(userRepository.findByEmail(dto.email())).thenReturn(null);
+        when(findUserByEmailService.run(dto.email())).thenReturn(null);
         UserReturnDTO response = createUserService.run(dto);
         assertThat(response).isInstanceOf(UserReturnDTO.class);
     }

@@ -11,28 +11,20 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import static java.lang.String.format;
-
 @Service
 public class UpdatePasswordService {
+    @Autowired
+    FindUserByEmailService findUserByEmailService;
+
     @Autowired
     private UserRepository repository;
 
     public UserReturnDTO run(String email, UpdatePasswordDTO dto) {
-        User currentUser = this.getUser(email);
+        User currentUser = this.findUserByEmailService.run(email);
         this.validateCurrentPassword(currentUser, dto.oldPassword());
         User user = updateUser(currentUser, dto.newPassword());
 
         return new UserReturnDTO(user);
-    }
-
-    private User getUser(String email) {
-        User user = this.repository.findByEmail(email).orElse(null);
-        if (user == null) {
-            throw new NotFoundException(format("Usuário de email %s não existe.", email));
-        }
-
-        return user;
     }
 
     private void validateCurrentPassword(User currentUser, String oldPassword) {

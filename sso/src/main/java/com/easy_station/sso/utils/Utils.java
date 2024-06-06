@@ -22,7 +22,7 @@ public class Utils {
 
             try {
                 if (field.get(value) == null) {
-                    return true;
+                        return true;
                 }
             } catch (IllegalAccessException e) {
                 throw new RuntimeException(e);
