@@ -1,14 +1,27 @@
-package com.easy_station.sso.auth;
+package com.easy_station.sso.grpc;
 
 import br.com.easy_station.sso.*;
+import com.easy_station.sso.users.dto.UserReturnDTO;
+import com.easy_station.sso.users.services.UserService;
 import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.server.service.GrpcService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @GrpcService
-public class AuthGrpcController extends SSOServiceGrpc.SSOServiceImplBase {
+public class SSOController extends SSOServiceGrpc.SSOServiceImplBase {
+    @Autowired
+    UserService userService;
+
     @Override
     public void findById(FindByIdParams request, StreamObserver<User> responseObserver) {
-        User user = User.newBuilder().setId("aa").setEmail("teste").setRole(Role.ADMIN).build();
+        UserReturnDTO userEntity = userService.findOne(request.getId());
+
+        User user = User.newBuilder()
+                .setId(userEntity.getId())
+                .setEmail(userEntity.getEmail())
+                .setRole(Role.forNumber(userEntity.getRole().ordinal()))
+                .build();
+
         responseObserver.onNext(user);
         responseObserver.onCompleted();
     }

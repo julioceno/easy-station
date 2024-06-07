@@ -1,4 +1,4 @@
-package com.easy_station.sso.infa.exceptions;
+package com.easy_station.sso.infa.http;
 
 import com.easy_station.sso.exceptions.BadRequestException;
 import com.easy_station.sso.exceptions.NotFoundException;

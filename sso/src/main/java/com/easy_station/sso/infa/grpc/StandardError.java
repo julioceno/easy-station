@@ -1,4 +1,4 @@
-package com.easy_station.sso.infa.exceptions;
+package com.easy_station.sso.infa.grpc;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
@@ -20,8 +20,13 @@ public class StandardError implements Serializable {
             timezone = "GMT"
     )
     private Instant timestamp;
-    private Integer status;
     private String error;
     private String message;
-    private String paht;
+
+    @Override
+    public String toString() {
+        return  "timestamp=" + timestamp +
+                ", error='" + error + '\'' +
+                ", message='" + message;
+    }
 }
