@@ -36,6 +36,7 @@ public class SecurityConfiguration {
     }
 
     private void authorizeHttpRequests(AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry authorize) {
+        // TODO: adjusting permissions
         authorize
                 .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                 .requestMatchers(HttpMethod.POST, "/auth/refreshToken").permitAll()
@@ -54,6 +55,9 @@ public class SecurityConfiguration {
 
     @Bean
     public GrpcAuthenticationReader grpcAuthenticationReader() {
+        System.out.println("grpc auth");
+        System.out.println("grpc auth");
+        System.out.println("grpc auth");
         return new BasicGrpcAuthenticationReader();
     }
 }

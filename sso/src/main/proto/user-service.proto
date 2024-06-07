@@ -1,20 +1,48 @@
 syntax = "proto3";
 
 option java_multiple_files = true;
-option java_package = "br.com.julioceno.v1.user";
+option java_package = "br.com.easy_station.sso";
 
-package br.com.julioceno.v1.user;
+package SSO_EASY_STATION;
 
-service UserService {
+service SSOService {
   rpc findById(FindByIdParams) returns (User) {}
+  rpc update(UpdateParams) returns (User) {}
+  rpc validateToken(ValidateTokenParams) returns (ValidateTokenResponse) {};
 }
 
+/* USER */
 message FindByIdParams {
   string id = 1;
+}
+
+message UpdateParams {
+  string id = 1;
+  Company company = 2;
 }
 
 message User {
   string id = 1;
   string email = 2;
-  string role = 3;
+  Role role = 3;
+  Company company = 4;
+}
+
+message Company {
+  string id = 1;
+  string name = 2;
+}
+
+enum Role {
+  ADMIN = 0;
+  USER= 1;
+}
+
+/* VALIDATE TOKEN */
+message ValidateTokenParams {
+  string token = 1;
+}
+
+message ValidateTokenResponse {
+  bool ok = 1;
 }
