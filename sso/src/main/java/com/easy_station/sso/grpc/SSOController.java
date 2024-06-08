@@ -61,7 +61,6 @@ public class SSOController extends SSOServiceGrpc.SSOServiceImplBase {
     @Override
     public void refreshToken(RefreshTokenParams request, StreamObserver<RefreshTokenResponse> responseObserver) {
         RefreshTokenDTO refreshTokenDTO = new RefreshTokenDTO(request.getRefreshToken());
-        System.out.println(refreshTokenDTO.toString());
         SignInDTO signInDTO = authService.refreshToken(refreshTokenDTO);
 
         RefreshTokenResponse response = RefreshTokenResponse
