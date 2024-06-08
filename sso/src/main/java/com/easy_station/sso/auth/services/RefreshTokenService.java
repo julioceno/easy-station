@@ -34,6 +34,7 @@ public class RefreshTokenService {
         String newToken = createTokenService.run(user);
 
         boolean isWillExpireSoon = willExpireSoon(refreshToken);
+        System.out.println(isWillExpireSoon);
         if (isWillExpireSoon) {
             String newRefreshToken = createRefreshTokenService.run(user.getId());
             return toDTO(newToken, newRefreshToken);

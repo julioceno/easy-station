@@ -32,6 +32,6 @@ public class CreateRefreshTokenService {
     private Instant generateExpirationDate(){
         return Instant
                 .now()
-                .plus(Duration.ofMinutes(30));
+                .plus(Duration.ofHours(8));
     }
 }
