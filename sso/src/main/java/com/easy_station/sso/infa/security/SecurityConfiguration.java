@@ -55,9 +55,6 @@ public class SecurityConfiguration {
 
     @Bean
     public GrpcAuthenticationReader grpcAuthenticationReader() {
-        System.out.println("grpc auth");
-        System.out.println("grpc auth");
-        System.out.println("grpc auth");
         return new BasicGrpcAuthenticationReader();
     }
 }

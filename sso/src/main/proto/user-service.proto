@@ -6,17 +6,18 @@ option java_package = "br.com.easy_station.sso";
 package SSO_EASY_STATION;
 
 service SSOService {
-  rpc findById(FindByIdParams) returns (User) {}
-  rpc update(UpdateParams) returns (User) {}
-  rpc validateToken(ValidateTokenParams) returns (ValidateTokenResponse) {};
+  rpc findById(FindUserByIdParams) returns (User) {}
+  rpc update(UpdateUserParams) returns (User) {}
+  rpc validateToken(ValidateTokenParams) returns (ValidateTokenResponse) {}
+  rpc refreshToken(RefreshTokenParams) returns (RefreshTokenResponse) {};
 }
 
 /* USER */
-message FindByIdParams {
+message FindUserByIdParams {
   string id = 1;
 }
 
-message UpdateParams {
+message UpdateUserParams {
   string id = 1;
   Company company = 2;
 }
@@ -44,5 +45,15 @@ message ValidateTokenParams {
 }
 
 message ValidateTokenResponse {
-  bool ok = 1;
+  string email = 1;
+}
+
+/* Refresh token */
+message RefreshTokenParams {
+  string refreshToken = 1;
+}
+
+message RefreshTokenResponse {
+  string token = 1;
+  string refreshToken = 2;
 }

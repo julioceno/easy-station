@@ -1,5 +1,6 @@
 package com.easy_station.sso.infa.grpc;
 
+import com.easy_station.sso.exceptions.UnauthorizedException;
 import io.grpc.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,11 +22,10 @@ public class ApiKeyInterceptor implements ServerInterceptor {
             ServerCallHandler<ReqT, RespT> serverCallHandler
     ) {
         logger.info("Header received from client." );
-        String apiKeyReceveid = metadata.get(API_KEY_HEADER);
-        if (!Objects.equals(apiKeyReceveid, apiKey)) {
+        String apiKeyReceived = metadata.get(API_KEY_HEADER);
+        if (!Objects.equals(apiKeyReceived, apiKey)) {
             logger.error("Api key is invalid.");
-            serverCall.close(Status.UNAUTHENTICATED.withDescription("Invalid API Key"), metadata);
-            return new ServerCall.Listener<ReqT>() {};
+            throw new UnauthorizedException("A api key é inválida.");
         }
 
         logger.info("Api key is valid.");

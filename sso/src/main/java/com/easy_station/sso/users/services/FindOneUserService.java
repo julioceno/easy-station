@@ -19,7 +19,6 @@ public class FindOneUserService {
         if (user == null) {
             throw new NotFoundException(format("Usuário de id %s não existe", id));
         }
-
         return new UserReturnDTO(user);
     }
 }

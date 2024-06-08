@@ -8,10 +8,12 @@ public class UserReturnDTO {
     private String id;
     private String email;
     private UserRoleEnum role;
+    private CompanyDTO company;
 
     public UserReturnDTO(User user) {
         this.id = user.getId();
         this.email = user.getEmail();
         this.role = user.getRole();
+        this.company = user.getCompany();
     }
 }
