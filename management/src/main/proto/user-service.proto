@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "br.com.easy_station.sso";
+
+package SSO_EASY_STATION;
+
+service SSOService {
+  rpc findById(FindUserByIdParams) returns (User) {}
+  rpc update(UpdateUserParams) returns (User) {}
+  rpc validateToken(ValidateTokenParams) returns (ValidateTokenResponse) {}
+  rpc refreshToken(RefreshTokenParams) returns (RefreshTokenResponse) {};
+}
+
+/* USER */
+message FindUserByIdParams {
+  string id = 1;
+}
+
+message UpdateUserParams {
+  string id = 1;
+  Company company = 2;
+}
+
+message User {
+  string id = 1;
+  string email = 2;
+  Role role = 3;
+  Company company = 4;
+}
+
+message Company {
+  string id = 1;
+  string name = 2;
+}
+
+enum Role {
+  ADMIN = 0;
+  USER= 1;
+}
+
+/* VALIDATE TOKEN */
+message ValidateTokenParams {
+  string token = 1;
+}
+
+message ValidateTokenResponse {
+  string email = 1;
+}
+
+/* Refresh token */
+message RefreshTokenParams {
+  string refreshToken = 1;
+}
+
+message RefreshTokenResponse {
+  string token = 1;
+  string refreshToken = 2;
+}
