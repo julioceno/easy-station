@@ -1,0 +1,21 @@
+services:
+  mongodb:
+    image: mongo:latest
+    restart: unless-stopped
+    volumes:
+      - mongodb-data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: sso_easy_station
+    ports:
+      - 27017:27017
+  postgresdb:
+    image: postgres:15-alpine
+    volumes:
+      - postgres-data:/data/db
+    environment:
+      - 'POSTGRES_USER=postgres'
+      - 'POSTGRES_PASSWORD=postgres'
+      - 'POSTGRES_DB=easy_station'
+volumes:
+  mongodb-data:
+  postgres-data:

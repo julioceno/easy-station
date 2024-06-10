@@ -1,6 +1,5 @@
 package com.easy_station.management;
 
-import br.com.easy_station.sso.User;
 import com.easy_station.management.grpc.SSOClientService;
 import com.easy_station.management.grpc.dto.UserReturnDTO;
 import org.springframework.beans.factory.annotation.Autowired;
