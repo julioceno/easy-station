@@ -11,7 +11,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 
-@Controller("/companies")
+@RestController
+@RequestMapping(value = "/companies")
 public class CompanyController {
     @Autowired
     private CompanyService companyService;

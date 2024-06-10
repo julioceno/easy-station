@@ -1,11 +1,9 @@
 package com.easy_station.management.company.database;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.data.annotation.Id;
+
+import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,6 +11,7 @@ import org.springframework.data.annotation.Id;
 @Getter
 @Setter
 @Table(name = "companies")
+@Entity(name = "companies")
 public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -20,4 +19,15 @@ public class Company {
 
     @Column(name = "name", unique = true, nullable = false)
     private String name;
+
+    @Column(name = "created_at", nullable = false)
+    private Date createdAt;
+
+    @Column(name = "updated_at", nullable = false)
+    private Date updatedAt;
+
+    @PreUpdate
+    private void onUpdate() {
+        this.updatedAt = new Date();
+    }
 }
