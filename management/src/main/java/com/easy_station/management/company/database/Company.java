@@ -2,16 +2,20 @@ package com.easy_station.management.company.database;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode(of = "id")
 @Getter
 @Setter
 @Table(name = "companies")
 @Entity(name = "companies")
+@EntityListeners(AuditingEntityListener.class)
 public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -20,14 +24,11 @@ public class Company {
     @Column(name = "name", unique = true, nullable = false)
     private String name;
 
+    @CreatedDate
     @Column(name = "created_at", nullable = false)
     private Date createdAt;
 
+    @LastModifiedDate
     @Column(name = "updated_at", nullable = false)
     private Date updatedAt;
-
-    @PreUpdate
-    private void onUpdate() {
-        this.updatedAt = new Date();
-    }
 }
