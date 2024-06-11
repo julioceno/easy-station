@@ -1,11 +1,10 @@
-package com.easy_station.management.company;
+package com.easy_station.management.companies;
 
-import com.easy_station.management.company.dto.CompanyDTO;
-import com.easy_station.management.company.dto.CreateCompanyDTO;
-import com.easy_station.management.company.services.CompanyService;
+import com.easy_station.management.companies.dto.CompanyDTO;
+import com.easy_station.management.companies.dto.CreateCompanyDTO;
+import com.easy_station.management.companies.services.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 

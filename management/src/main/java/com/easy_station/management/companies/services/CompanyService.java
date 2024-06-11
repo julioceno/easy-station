@@ -1,7 +1,7 @@
-package com.easy_station.management.company.services;
+package com.easy_station.management.companies.services;
 
-import com.easy_station.management.company.dto.CompanyDTO;
-import com.easy_station.management.company.dto.CreateCompanyDTO;
+import com.easy_station.management.companies.dto.CompanyDTO;
+import com.easy_station.management.companies.dto.CreateCompanyDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

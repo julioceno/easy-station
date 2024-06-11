@@ -1,7 +1,7 @@
 package com.easy_station.sso.auth.services;
 
 import com.easy_station.sso.auth.dto.SignInDTO;
-import com.easy_station.sso.users.dto.AuthDTO;
+import com.easy_station.sso.auth.dto.AuthDTO;
 import com.easy_station.sso.users.domain.User;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;

@@ -1,7 +1,7 @@
 package com.easy_station.sso.auth.services;
 
 import com.easy_station.sso.auth.dto.RefreshTokenDTO;
-import com.easy_station.sso.users.dto.AuthDTO;
+import com.easy_station.sso.auth.dto.AuthDTO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

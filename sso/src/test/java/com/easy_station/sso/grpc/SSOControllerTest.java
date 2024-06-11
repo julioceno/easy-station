@@ -138,7 +138,7 @@ class SSOControllerTest {
     @Test
     @DisplayName("Should call refreshToken and build token and refresh token")
     void test5() {
-        ArgumentCaptor<RefreshTokenResponse> validateTokenCaptor = ArgumentCaptor.forClass(RefreshTokenResponse.class);
+        ArgumentCaptor<TokensResponse> validateTokenCaptor = ArgumentCaptor.forClass(TokensResponse.class);
         RefreshTokenParams request = RefreshTokenParams
                 .newBuilder()
                 .setRefreshToken("refreshToken")
@@ -152,7 +152,7 @@ class SSOControllerTest {
         verify(responseObserver).onNext(validateTokenCaptor.capture());
         verify(responseObserver).onCompleted();
 
-        RefreshTokenResponse response = validateTokenCaptor.getValue();
+        TokensResponse response = validateTokenCaptor.getValue();
         assertEquals("token", response.getToken());
         assertEquals("refreshToken", response.getRefreshToken());
     }

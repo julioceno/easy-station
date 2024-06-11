@@ -1,6 +1,7 @@
 package com.easy_station.sso.grpc;
 
 import br.com.easy_station.sso.*;
+import com.easy_station.sso.auth.dto.AuthDTO;
 import com.easy_station.sso.auth.dto.RefreshTokenDTO;
 import com.easy_station.sso.auth.dto.SignInDTO;
 import com.easy_station.sso.auth.services.AuthService;
@@ -59,11 +60,26 @@ public class SSOController extends SSOServiceGrpc.SSOServiceImplBase {
     }
 
     @Override
-    public void refreshToken(RefreshTokenParams request, StreamObserver<RefreshTokenResponse> responseObserver) {
+    public void login(LoginParams request, StreamObserver<TokensResponse> responseObserver) {
+        AuthDTO authDTO = new AuthDTO(request.getEmail(), request.getPassword());
+        SignInDTO signInDTO = authService.signIn(authDTO);
+
+        TokensResponse response = TokensResponse
+                .newBuilder()
+                .setToken(signInDTO.token())
+                .setRefreshToken(signInDTO.refreshToken())
+                .build();
+
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void refreshToken(RefreshTokenParams request, StreamObserver<TokensResponse> responseObserver) {
         RefreshTokenDTO refreshTokenDTO = new RefreshTokenDTO(request.getRefreshToken());
         SignInDTO signInDTO = authService.refreshToken(refreshTokenDTO);
 
-        RefreshTokenResponse response = RefreshTokenResponse
+        TokensResponse response = TokensResponse
                 .newBuilder()
                 .setToken(signInDTO.token())
                 .setRefreshToken(signInDTO.refreshToken())

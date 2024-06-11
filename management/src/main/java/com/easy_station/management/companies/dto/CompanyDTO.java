@@ -1,4 +1,4 @@
-package com.easy_station.management.company.dto;
+package com.easy_station.management.companies.dto;
 
 import lombok.*;
 

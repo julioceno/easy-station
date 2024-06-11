@@ -1,9 +1,9 @@
-package com.easy_station.management.company.services;
+package com.easy_station.management.companies.services;
 
-import com.easy_station.management.company.database.Company;
-import com.easy_station.management.company.database.CompanyRepository;
-import com.easy_station.management.company.dto.CompanyDTO;
-import com.easy_station.management.company.dto.CreateCompanyDTO;
+import com.easy_station.management.companies.database.Company;
+import com.easy_station.management.companies.database.CompanyRepository;
+import com.easy_station.management.companies.dto.CompanyDTO;
+import com.easy_station.management.companies.dto.CreateCompanyDTO;
 import com.easy_station.management.exceptions.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

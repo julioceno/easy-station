@@ -3,12 +3,16 @@ package com.easy_station.management.grpc;
 import br.com.easy_station.sso.FindUserByIdParams;
 import br.com.easy_station.sso.SSOServiceGrpc;
 import br.com.easy_station.sso.User;
+import com.easy_station.management.auth.dto.AuthDTO;
+import com.easy_station.management.auth.dto.SignInDTO;
 import com.easy_station.management.grpc.dto.UserReturnDTO;
 import com.easy_station.management.infra.grpc.ApiKeyClientInterceptor;
 import net.devh.boot.grpc.client.inject.GrpcClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+
+import static java.lang.String.format;
 
 @Component
 public class SSOClientService {
@@ -24,6 +28,11 @@ public class SSOClientService {
 
         logger.info("User obtained, convert DTO and return user...");
         return new UserReturnDTO(response);
+    }
+
+    public void login(AuthDTO dto) {
+        logger.info(format("Login user with email %s", dto.email()));
+        Login
     }
 
 }

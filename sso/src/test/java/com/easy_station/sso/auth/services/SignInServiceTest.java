@@ -2,15 +2,13 @@ package com.easy_station.sso.auth.services;
 
 import com.easy_station.sso.auth.dto.SignInDTO;
 import com.easy_station.sso.users.domain.User;
-import com.easy_station.sso.users.dto.AuthDTO;
-import org.junit.jupiter.api.BeforeEach;
+import com.easy_station.sso.auth.dto.AuthDTO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
