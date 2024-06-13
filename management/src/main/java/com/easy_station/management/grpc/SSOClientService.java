@@ -1,8 +1,6 @@
 package com.easy_station.management.grpc;
 
-import br.com.easy_station.sso.FindUserByIdParams;
-import br.com.easy_station.sso.SSOServiceGrpc;
-import br.com.easy_station.sso.User;
+import br.com.easy_station.sso.*;
 import com.easy_station.management.auth.dto.AuthDTO;
 import com.easy_station.management.auth.dto.SignInDTO;
 import com.easy_station.management.grpc.dto.UserReturnDTO;
@@ -30,9 +28,18 @@ public class SSOClientService {
         return new UserReturnDTO(response);
     }
 
-    public void login(AuthDTO dto) {
+    public SignInDTO login(AuthDTO dto) {
         logger.info(format("Login user with email %s", dto.email()));
-        Login
+
+        LoginParams request = LoginParams.newBuilder()
+                .setEmail(dto.email())
+                .setPassword(dto.password())
+                .build();
+
+        TokensResponse tokensResponse = ssoServiceBlockingStub.login(request);
+
+        return new SignInDTO(tokensResponse.getToken(), tokensResponse.getRefreshToken());
     }
+
 
 }

@@ -9,22 +9,26 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.util.Date;
 
 @Entity
-@Table(name = "external_users")
+@Table(name = "users")
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
 @Getter
 @EqualsAndHashCode(of = "id")
 @EntityListeners(AuditingEntityListener.class)
-public class ExternalUser {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    private String name;
+    @Column(unique = true)
+    private String email;
 
-    @Column(name = "external_id")
+    @Column(name = "external_id", unique = true)
     private String externalId;
+
+    @Column(name = "company_id")
+    private String companyId;
 
     @CreatedDate
     @Column(name = "created_at", nullable = false)
