@@ -23,7 +23,7 @@ public class UsersController {
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(userDTO.id())
+                .buildAndExpand(userDTO.getId())
                 .toUri();
 
         return ResponseEntity

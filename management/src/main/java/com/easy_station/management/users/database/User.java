@@ -14,6 +14,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Setter
 @Getter
+@ToString
 @EqualsAndHashCode(of = "id")
 @EntityListeners(AuditingEntityListener.class)
 public class User {

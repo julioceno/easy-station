@@ -22,11 +22,11 @@ public class CreateUserService {
     private UserRepository userRepository;
 
     @Autowired
-    private SSOClientService ssoClientService;
+    private UpdateCompanyInExternalUserService updateCompanyInExternalUserService;
 
     public UserDTO run(CreateUserDTO createUserDTO) {
-        UserReturnDTO externalUser = getUserInSSO(createUserDTO);
-        throwIfUserAlreadyExists(externalUser);
+        throwIfUserAlreadyExists(createUserDTO.externalUserId());
+        UserReturnDTO externalUser = updateCompanyInExternalUserService.run(createUserDTO);
         User userBuilt = buildUser(externalUser, createUserDTO);
         User userCreated = createUser(userBuilt);
 
@@ -38,19 +38,11 @@ public class CreateUserService {
         );
     }
 
-    private UserReturnDTO getUserInSSO(CreateUserDTO createUserDTO) {
-        logger.info(format("Getting user with id %s...", createUserDTO.externalUserId()));
-        UserReturnDTO externalUser = ssoClientService.findById(createUserDTO.externalUserId());
-        logger.info("User obtained");
-
-        return externalUser;
-    }
-
-    private void throwIfUserAlreadyExists(UserReturnDTO externalUser) {
-        User userAlreadyExists = userRepository.findByExternalId(externalUser.getId()).orElse(null);
+    private void throwIfUserAlreadyExists(String externalUserId) {
+        User userAlreadyExists = userRepository.findByExternalId(externalUserId).orElse(null);
         if (userAlreadyExists != null) {
-            logger.error(format("External User with id %s already exists", externalUser.getId()));
-            throw new BadRequestException(format("Usuário já existente."));
+            logger.error(format("External User with id %s already exists", externalUserId));
+            throw new BadRequestException("Usuário já existente.");
         }
     }
 
@@ -66,9 +58,9 @@ public class CreateUserService {
     }
 
     private User createUser(User userToCreate) {
-        System.out.println("Saving user...");
+        logger.info("Saving user...");
         User userCreated = userRepository.save(userToCreate);
-        System.out.println("User saved");
+        logger.info("User saved");
         return userCreated;
     }
 }

@@ -5,6 +5,7 @@ import com.easy_station.management.auth.dto.AuthDTO;
 import com.easy_station.management.auth.dto.SignInDTO;
 import com.easy_station.management.grpc.dto.UserReturnDTO;
 import com.easy_station.management.infra.grpc.ApiKeyClientInterceptor;
+import com.easy_station.management.users.dto.UserDTO;
 import net.devh.boot.grpc.client.inject.GrpcClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,5 +42,24 @@ public class SSOClientService {
         return new SignInDTO(tokensResponse.getToken(), tokensResponse.getRefreshToken());
     }
 
+    public UserReturnDTO update(UserDTO userDTO) {
+        logger.info(format("Create call in method update with user %s...", userDTO.toString()));
+        Company company = Company
+                .newBuilder()
+                .setId(userDTO.getCompany().getId())
+                .setName(userDTO.getCompany().getName())
+                .build();
+
+        UpdateUserParams request = UpdateUserParams
+                .newBuilder()
+                .setId(userDTO.getExternalId())
+                .setCompany(company)
+                .build();
+
+        User response = ssoServiceBlockingStub.update(request);
+
+        logger.info("User updated");
+        return new UserReturnDTO(response);
+    }
 
 }
