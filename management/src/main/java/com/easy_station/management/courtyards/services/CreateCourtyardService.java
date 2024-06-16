@@ -31,7 +31,7 @@ public class CreateCourtyardService {
         Courtyard courtyard = courtyardsRepository.findByNameAndCompanyId(name, companyUd).orElse(null);
         if (courtyard != null) {
             logger.error(format("Courtyard with name %s already exists", name));
-            throw new BadRequestException("Pátio já existe para essa empresa.");
+            throw new BadRequestException(format("Pátio com nome %s já existe para essa empresa.", name ));
         }
 
         logger.info("Courtyard not found");
@@ -41,9 +41,9 @@ public class CreateCourtyardService {
         logger.info("Building courtyard to create...");
         Courtyard courtyardToCreate = new Courtyard();
         courtyardToCreate.setName(dto.name());
-        courtyardToCreate.setMaxCars(dto.maxCards());
+        courtyardToCreate.setMaxCars(dto.maxCars());
         courtyardToCreate.setCompanyId(companyId);
-        logger.info("Courtyard builded, save database...");
+        logger.info("Courtyard built, save database...");
 
         Courtyard courtyardSaved = courtyardsRepository.save(courtyardToCreate);
         logger.info("Courtyard saved");

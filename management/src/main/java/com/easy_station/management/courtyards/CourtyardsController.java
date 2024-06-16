@@ -7,6 +7,8 @@ import com.easy_station.management.courtyards.services.CourtyardsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/courtyards")
 public class CourtyardsController {
@@ -15,6 +17,11 @@ public class CourtyardsController {
 
     @Autowired
     GetCompanyIdByTokenService getCompanyIdByTokenService;
+
+    @GetMapping
+    public List<CourtyardDTO> findAll(@RequestAttribute("companyId") String companyId) {
+        return courtyardsService.findAll(companyId);
+    }
 
     @GetMapping("/{id}")
     public CourtyardDTO findOne(@RequestAttribute("companyId") String companyId, @PathVariable String id) {
