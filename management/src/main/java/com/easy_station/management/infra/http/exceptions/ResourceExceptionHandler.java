@@ -39,7 +39,7 @@ public class ResourceExceptionHandler {
 
     @ExceptionHandler(BadRequestException.class)
     public ResponseEntity<StandardError> badRequest(
-            UnauthorizedException e,
+            BadRequestException e,
             HttpServletRequest request
     ) {
         String error = "Bad Request";

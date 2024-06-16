@@ -28,9 +28,11 @@ public class CreateCourtyardService {
 
     private void throwIfCourtyardAlreadyExists(String name, String companyUd) {
         logger.info(format("Finding company by name %s and companyId %s...", name, companyUd));
-        courtyardsRepository.findByNameAndCompanyId(name, companyUd).orElseThrow(() -> {
+        Courtyard courtyard = courtyardsRepository.findByNameAndCompanyId(name, companyUd).orElse(null);
+        if (courtyard != null) {
+            logger.error(format("Courtyard with name %s already exists", name));
             throw new BadRequestException("Pátio já existe para essa empresa.");
-        });
+        }
 
         logger.info("Courtyard not found");
     }

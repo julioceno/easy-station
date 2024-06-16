@@ -17,16 +17,12 @@ public class CourtyardsController {
     GetCompanyIdByTokenService getCompanyIdByTokenService;
 
     @GetMapping("/{id}")
-    public CourtyardDTO findOne(@RequestHeader("Authorization") String bearerToken, @PathVariable String id) {
-        // TODO: criar filter que já vai fazer a busca do companyId e pegar depois pelo decorator
-        String companyId = getCompanyIdByTokenService.run(bearerToken);
+    public CourtyardDTO findOne(@RequestAttribute("companyId") String companyId, @PathVariable String id) {
         return courtyardsService.findOne(id, companyId);
     }
 
     @PostMapping
-    public CourtyardDTO create(@RequestHeader("Authorization") String bearerToken, @RequestBody CreateCourtyardDTO dto) {
-        // TODO: criar filter que já vai fazer a busca do companyId e pegar depois pelo decorator
-        String companyId = getCompanyIdByTokenService.run(bearerToken);
+    public CourtyardDTO create(@RequestAttribute("companyId") String companyId, @RequestBody CreateCourtyardDTO dto) {
         return courtyardsService.create(dto, companyId);
     }
 

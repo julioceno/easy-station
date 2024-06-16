@@ -4,7 +4,7 @@ import com.easy_station.management.courtyards.database.Courtyard;
 import com.easy_station.management.courtyards.database.CourtyardsRepository;
 import com.easy_station.management.courtyards.dto.CourtyardDTO;
 import com.easy_station.management.exceptions.NotFoundException;
-import com.easy_station.management.infra.http.AuthInterceptor;
+import com.easy_station.management.infra.http.interceptors.AuthInterceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

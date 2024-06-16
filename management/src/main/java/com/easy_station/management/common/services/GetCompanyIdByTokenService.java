@@ -22,8 +22,7 @@ public class GetCompanyIdByTokenService {
     @Autowired
     private SSOClientService ssoClientService;
 
-    public String run(String bearerToken) {
-        String token = Utils.recoverToken(bearerToken);
+    public String run(String token) {
         String email = ssoClientService.validateToken(token);
         User user = getUser(email);
 
@@ -41,6 +40,4 @@ public class GetCompanyIdByTokenService {
         logger.info("User got, return user...");
         return user;
     }
-
-
 }

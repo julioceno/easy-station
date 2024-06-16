@@ -29,7 +29,7 @@ public class ApiKeyClientInterceptor implements ClientInterceptor {
                 super.start(new SimpleForwardingClientCallListener<RespT>(responseListener) {
                     @Override
                     public void onHeaders(Metadata headers) {
-                        logger.info("header received from server:" + headers);
+                        logger.info("header received from server:" + headers.toString());
                         super.onHeaders(headers);
                     }
                 }, headers);

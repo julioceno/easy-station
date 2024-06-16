@@ -27,7 +27,7 @@ public class Courtyard {
     @Column(nullable = false)
     private Integer maxCars;
 
-    @Column(name = "company_id", unique = true)
+    @Column(name = "company_id")
     private String companyId;
 
     @CreatedDate
