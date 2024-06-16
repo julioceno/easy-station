@@ -62,4 +62,17 @@ public class SSOClientService {
         return new UserReturnDTO(response);
     }
 
+    public String validateToken(String token) {
+        logger.info("Create call in method validateToken");
+        ValidateTokenParams request = ValidateTokenParams
+                .newBuilder()
+                .setToken(token)
+                .build();
+
+        ValidateTokenResponse response = ssoServiceBlockingStub.validateToken(request);
+
+        logger.info("Token validated");
+        return response.getEmail();
+    }
+
 }

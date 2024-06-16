@@ -18,6 +18,7 @@ public class CompanyController {
     @Autowired
     private CompanyService companyService;
 
+    // ADMIN
     @PostMapping
     ResponseEntity<CompanyDTO> create(@RequestBody CreateCompanyDTO dto) {
         CompanyDTO companyDTO = companyService.create(dto);
@@ -32,12 +33,14 @@ public class CompanyController {
                 .body(companyDTO);
     }
 
+    // ADMIN
     @GetMapping("/{id}")
     ResponseEntity<CompanyDTO> findOne(@PathVariable String id) {
         CompanyDTO companyDTO = companyService.findOne(id);
         return ResponseEntity.ok(companyDTO);
     }
 
+    // ADMIN
     @PatchMapping("/{id}")
     ResponseEntity<CompanyDTO> update(
             @PathVariable String id,
@@ -47,12 +50,14 @@ public class CompanyController {
         return ResponseEntity.ok(companyDTO);
     }
 
+    // ADMIN
     @DeleteMapping("/{id}")
     ResponseEntity delete(@PathVariable String id) {
         companyService.delete(id);
         return ResponseEntity.noContent().build();
     }
 
+    // ADMIN
     @PutMapping("/{id}/management")
     ResponseEntity<Management> updateManagement(@PathVariable String id, @RequestBody CreateManagementDTO dto) {
         Management management = companyService.upsertManagement(id, dto);

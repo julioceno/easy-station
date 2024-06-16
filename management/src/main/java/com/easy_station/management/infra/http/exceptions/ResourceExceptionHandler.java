@@ -1,4 +1,4 @@
-package com.easy_station.management.infra.http;
+package com.easy_station.management.infra.http.exceptions;
 
 import com.easy_station.management.exceptions.BadRequestException;
 import com.easy_station.management.exceptions.NotFoundException;
@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.time.Instant;
 

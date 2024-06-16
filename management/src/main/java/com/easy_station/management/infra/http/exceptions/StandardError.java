@@ -1,4 +1,4 @@
-package com.easy_station.management.infra.http;
+package com.easy_station.management.infra.http.exceptions;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
@@ -10,6 +10,7 @@ import java.time.Instant;
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 public class StandardError implements Serializable {
     @JsonFormat(
             shape = JsonFormat.Shape.STRING,
