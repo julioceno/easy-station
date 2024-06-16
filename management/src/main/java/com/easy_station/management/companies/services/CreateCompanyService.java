@@ -25,13 +25,14 @@ public class CreateCompanyService {
         Company companyCreated = companyRepository.save(buildedUser);
         logger.info("Company saved, return company...");
 
-        return new CompanyDTO(companyCreated.getId(), companyCreated.getName());
+        return new CompanyDTO(companyCreated.getId(), companyCreated.getName(), companyCreated.getPriceHour());
     }
 
     private Company buildUser(CreateCompanyDTO dto) {
         logger.info(format("Build user to save with dto %s...", dto.toString()));
         Company createCompany = new Company();
         createCompany.setName(dto.name());
+        createCompany.setPriceHour(dto.priceHour());
 
         logger.info("User builded");
         return createCompany;

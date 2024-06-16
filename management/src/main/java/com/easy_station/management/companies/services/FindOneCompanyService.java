@@ -22,7 +22,7 @@ public class FindOneCompanyService {
         logger.info(format("Getting company with id %s...", id));
         Company company = companyRepository.findById(id).orElseThrow(() -> error(id));
         logger.info("Company found, return...");
-        return new CompanyDTO(company.getId(), company.getName());
+        return new CompanyDTO(company.getId(), company.getName(), company.getPriceHour());
     }
 
     private NotFoundException error(String id) {

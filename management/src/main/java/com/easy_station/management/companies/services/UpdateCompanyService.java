@@ -25,7 +25,7 @@ public class UpdateCompanyService {
         currentCompany.setName(dto.name());
 
         Company companyUpdated = companyRepository.save(currentCompany);
-        return new CompanyDTO(companyUpdated.getId(), companyUpdated.getName());
+        return new CompanyDTO(companyUpdated.getId(), companyUpdated.getName(), companyUpdated.getPriceHour());
     }
 
     public Company getCompany(String id) {

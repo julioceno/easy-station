@@ -28,6 +28,9 @@ public class Company {
     @Column(name = "name", unique = true, nullable = false)
     private String name;
 
+    @Column(name = "price_hour", nullable = false)
+    private Double priceHour;
+
     @JsonIgnore
     @OneToMany(mappedBy = "id", targetEntity = User.class)
     private List<User> users = new ArrayList<>();

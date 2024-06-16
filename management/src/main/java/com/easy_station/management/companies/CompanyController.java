@@ -1,10 +1,9 @@
 package com.easy_station.management.companies;
 
-import com.easy_station.management.companies.database.Management;
 import com.easy_station.management.companies.dto.CompanyDTO;
 import com.easy_station.management.companies.dto.CreateCompanyDTO;
-import com.easy_station.management.companies.dto.management.CreateManagementDTO;
 import com.easy_station.management.companies.services.CompanyService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +19,7 @@ public class CompanyController {
 
     // ADMIN
     @PostMapping
-    ResponseEntity<CompanyDTO> create(@RequestBody CreateCompanyDTO dto) {
+    ResponseEntity<CompanyDTO> create(@RequestBody @Valid CreateCompanyDTO dto) {
         CompanyDTO companyDTO = companyService.create(dto);
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -57,10 +56,4 @@ public class CompanyController {
         return ResponseEntity.noContent().build();
     }
 
-    // ADMIN
-    @PutMapping("/{id}/management")
-    ResponseEntity<Management> updateManagement(@PathVariable String id, @RequestBody CreateManagementDTO dto) {
-        Management management = companyService.upsertManagement(id, dto);
-        return ResponseEntity.ok(management);
-    }
 }

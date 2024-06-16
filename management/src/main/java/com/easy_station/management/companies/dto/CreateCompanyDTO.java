@@ -1,4 +1,4 @@
 package com.easy_station.management.companies.dto;
 
-public record CreateCompanyDTO (String name) {
+public record CreateCompanyDTO (String name, Double priceHour) {
 }
