@@ -13,6 +13,7 @@ public class CourtyardsService {
     private final FindOneCourtyardService findOneCourtyardService;
     private final CreateCourtyardService createCourtyardService;
     private final FindAllCourtyardsService findAllCourtyardsService;
+    private final DeleteCourtyardService deleteCourtyardService;
 
     public CourtyardDTO findOne(String id, String companyId) {
         return findOneCourtyardService.run(id, companyId);
@@ -24,5 +25,9 @@ public class CourtyardsService {
 
     public List<CourtyardDTO> findAll(String companyId) {
         return findAllCourtyardsService.run(companyId);
+    }
+
+    public void delete(String id, String companyId) {
+        deleteCourtyardService.run(id, companyId);
     }
 }

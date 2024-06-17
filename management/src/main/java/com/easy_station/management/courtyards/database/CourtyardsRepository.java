@@ -1,6 +1,8 @@
 package com.easy_station.management.courtyards.database;
 
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
@@ -15,4 +17,9 @@ public interface CourtyardsRepository extends JpaRepository<Courtyard, String> {
 
     @Query(value = "select * from courtyards where company_id = ?1", nativeQuery = true)
     List<Courtyard> findAllByCompanyId(String companyId);
+
+    @Modifying
+    @Transactional
+    @Query(value = "DELETE FROM courtyards WHERE id = ?1 AND company_id = ?2", nativeQuery = true)
+    void deleteByIdAndCompanyId(String id, String companyId);
 }
