@@ -3,6 +3,7 @@ package com.easy_station.management.courtyards;
 import com.easy_station.management.common.services.GetCompanyIdByTokenService;
 import com.easy_station.management.courtyards.dto.CourtyardDTO;
 import com.easy_station.management.courtyards.dto.CreateCourtyardDTO;
+import com.easy_station.management.courtyards.dto.UpdateCourtyardDTO;
 import com.easy_station.management.courtyards.services.CourtyardsService;
 import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.http.ResponseEntity;
@@ -19,21 +20,28 @@ public class CourtyardsController {
     @Autowired
     GetCompanyIdByTokenService getCompanyIdByTokenService;
 
-    // TODO: Subsituir as respostas para ResponseEntity
-
     @GetMapping
-    public List<CourtyardDTO> findAll(@RequestAttribute("companyId") String companyId) {
-        return courtyardsService.findAll(companyId);
+    public ResponseEntity<List<CourtyardDTO>> findAll(@RequestAttribute("companyId") String companyId) {
+        List<CourtyardDTO> list = courtyardsService.findAll(companyId);
+        return ResponseEntity.ok(list);
     }
 
     @GetMapping("/{id}")
-    public CourtyardDTO findOne(@RequestAttribute("companyId") String companyId, @PathVariable String id) {
-        return courtyardsService.findOne(id, companyId);
+    public ResponseEntity<CourtyardDTO> findOne(@RequestAttribute("companyId") String companyId, @PathVariable String id) {
+        CourtyardDTO courtyardDTO = courtyardsService.findOne(id, companyId);
+        return ResponseEntity.ok(courtyardDTO);
     }
 
     @PostMapping
-    public CourtyardDTO create(@RequestAttribute("companyId") String companyId, @RequestBody CreateCourtyardDTO dto) {
-        return courtyardsService.create(dto, companyId);
+    public ResponseEntity<CourtyardDTO> create(@RequestAttribute("companyId") String companyId, @RequestBody CreateCourtyardDTO dto) {
+        CourtyardDTO courtyardDTO = courtyardsService.create(dto, companyId);
+        return ResponseEntity.ok(courtyardDTO);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<CourtyardDTO> update(@RequestAttribute("companyId") String companyId, @RequestBody UpdateCourtyardDTO dto, @PathVariable String id) {
+        CourtyardDTO courtyardDTO = courtyardsService.update(id, dto, companyId);
+        return ResponseEntity.ok(courtyardDTO);
     }
 
     @DeleteMapping("/{id}")

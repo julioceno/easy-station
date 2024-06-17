@@ -18,6 +18,9 @@ public interface CourtyardsRepository extends JpaRepository<Courtyard, String> {
     @Query(value = "select * from courtyards where company_id = ?1", nativeQuery = true)
     List<Courtyard> findAllByCompanyId(String companyId);
 
+    @Query(value = "select * from courtyards where name = ?1 and company_id = ?2 and id <> ?3 LIMIT 1", nativeQuery = true)
+    Optional<Courtyard> findByNameAndCompanyIdAndNotId(String name, String companyId, String id);
+
     @Modifying
     @Transactional
     @Query(value = "DELETE FROM courtyards WHERE id = ?1 AND company_id = ?2", nativeQuery = true)
