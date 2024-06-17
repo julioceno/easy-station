@@ -2,6 +2,7 @@ package com.easy_station.management.companies;
 
 import com.easy_station.management.companies.dto.CompanyDTO;
 import com.easy_station.management.companies.dto.CreateCompanyDTO;
+import com.easy_station.management.companies.dto.UpdateCompanyDTO;
 import com.easy_station.management.companies.services.CompanyService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,10 +41,10 @@ public class CompanyController {
     }
 
     // ADMIN
-    @PatchMapping("/{id}")
+    @PutMapping("/{id}")
     ResponseEntity<CompanyDTO> update(
             @PathVariable String id,
-            @RequestBody CreateCompanyDTO dto
+            @RequestBody UpdateCompanyDTOgi dto
     ) {
         CompanyDTO companyDTO = companyService.update(id, dto);
         return ResponseEntity.ok(companyDTO);
@@ -55,5 +56,4 @@ public class CompanyController {
         companyService.delete(id);
         return ResponseEntity.noContent().build();
     }
-
 }

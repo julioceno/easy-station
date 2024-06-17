@@ -25,7 +25,7 @@ public class UpdateCourtyardService {
         Courtyard currendCourtyard = getCourtyardAndThrowIfNotExists(id, companyId);
         verifyIfNameAlreadyUsedByOtherCourtyard(id, dto.name(), companyId);
 
-        Courtyard courtyardUpdated = updateCourtyard(currendCourtyard, dto, companyId);
+        Courtyard courtyardUpdated = updateCourtyard(currendCourtyard, dto);
 
         logger.info("Return courtyard in patten dto...");
         return new CourtyardDTO(courtyardUpdated);
@@ -54,7 +54,7 @@ public class UpdateCourtyardService {
         return courtyard;
     }
 
-    private Courtyard updateCourtyard(Courtyard currendCourtyard, UpdateCourtyardDTO dto, String companyId) {
+    private Courtyard updateCourtyard(Courtyard currendCourtyard, UpdateCourtyardDTO dto) {
         logger.info("Building courtyard to update...");
         currendCourtyard.setName(dto.name());
         currendCourtyard.setMaxCars(dto.maxCars());

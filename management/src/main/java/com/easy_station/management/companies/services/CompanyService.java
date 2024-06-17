@@ -2,6 +2,7 @@ package com.easy_station.management.companies.services;
 
 import com.easy_station.management.companies.dto.CompanyDTO;
 import com.easy_station.management.companies.dto.CreateCompanyDTO;
+import com.easy_station.management.companies.dto.UpdateCompanyDTO;
 import com.easy_station.management.companies.dto.management.CreateManagementDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ public class CompanyService {
         return createCompanyService.run(dto);
     }
 
-    public CompanyDTO update(String id, CreateCompanyDTO dto) {
+    public CompanyDTO update(String id, UpdateCompanyDTO dto) {
         return this.updateCompanyService.run(id, dto);
     }
 

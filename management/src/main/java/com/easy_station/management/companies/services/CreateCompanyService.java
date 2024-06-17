@@ -19,22 +19,22 @@ public class CreateCompanyService {
     private CompanyRepository companyRepository;
 
     public CompanyDTO run(CreateCompanyDTO dto) {
-        Company buildedUser = buildUser(dto);
+        Company builtCompany = buildCompany(dto);
 
         logger.info("Saving company...");
-        Company companyCreated = companyRepository.save(buildedUser);
-        logger.info("Company saved, return company...");
+        Company companyCreated = companyRepository.save(builtCompany);
+        logger.info("Company saved, return company in DTO patten...");
 
-        return new CompanyDTO(companyCreated.getId(), companyCreated.getName(), companyCreated.getPriceHour());
+        return new CompanyDTO(companyCreated);
     }
 
-    private Company buildUser(CreateCompanyDTO dto) {
-        logger.info(format("Build user to save with dto %s...", dto.toString()));
+    private Company buildCompany(CreateCompanyDTO dto) {
+        logger.info(format("Build company to save with dto %s...", dto.toString()));
         Company createCompany = new Company();
         createCompany.setName(dto.name());
         createCompany.setPriceHour(dto.priceHour());
 
-        logger.info("User builded");
+        logger.info("Company built");
         return createCompany;
     }
 }

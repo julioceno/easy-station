@@ -8,7 +8,9 @@ import com.easy_station.management.courtyards.services.CourtyardsService;
 import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -35,7 +37,13 @@ public class CourtyardsController {
     @PostMapping
     public ResponseEntity<CourtyardDTO> create(@RequestAttribute("companyId") String companyId, @RequestBody CreateCourtyardDTO dto) {
         CourtyardDTO courtyardDTO = courtyardsService.create(dto, companyId);
-        return ResponseEntity.ok(courtyardDTO);
+        URI uri = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(courtyardDTO.getId())
+                .toUri();
+
+        return ResponseEntity.created(uri).body(courtyardDTO);
     }
 
     @PutMapping("/{id}")

@@ -3,7 +3,7 @@ package com.easy_station.management.companies.services;
 import com.easy_station.management.companies.database.Company;
 import com.easy_station.management.companies.database.CompanyRepository;
 import com.easy_station.management.companies.dto.CompanyDTO;
-import com.easy_station.management.companies.dto.CreateCompanyDTO;
+import com.easy_station.management.companies.dto.UpdateCompanyDTO;
 import com.easy_station.management.exceptions.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,16 +19,25 @@ public class UpdateCompanyService {
     @Autowired
     private CompanyRepository companyRepository;
 
-    // TODO: alterar o dto ou renomear
-    public CompanyDTO run(String id, CreateCompanyDTO dto) {
+    public CompanyDTO run(String id, UpdateCompanyDTO dto) {
         Company currentCompany = getCompany(id);
-        currentCompany.setName(dto.name());
+        Company companyUpdated = updateCompany(currentCompany, dto);
 
-        Company companyUpdated = companyRepository.save(currentCompany);
+        logger.info("Return company in pattern dto...");
         return new CompanyDTO(companyUpdated.getId(), companyUpdated.getName(), companyUpdated.getPriceHour());
     }
 
-    public Company getCompany(String id) {
+    private Company updateCompany(Company currentCompany, UpdateCompanyDTO dto) {
+        currentCompany.setName(dto.name());
+        currentCompany.setPriceHour(dto.priceHour());
+
+        logger.info("Updating company...");
+        Company companyUpdated = companyRepository.save(currentCompany);
+        logger.info("Company updated");
+        return companyUpdated;
+    }
+
+    private Company getCompany(String id) {
         logger.info(format("Getting company with id %s...", id));
         Company company = companyRepository.findById(id).orElseThrow(() -> {
             logger.error(format("Company with id %s not found", id));
