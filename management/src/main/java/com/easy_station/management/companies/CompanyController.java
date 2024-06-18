@@ -44,7 +44,7 @@ public class CompanyController {
     @PutMapping("/{id}")
     ResponseEntity<CompanyDTO> update(
             @PathVariable String id,
-            @RequestBody UpdateCompanyDTOgi dto
+            @RequestBody UpdateCompanyDTO dto
     ) {
         CompanyDTO companyDTO = companyService.update(id, dto);
         return ResponseEntity.ok(companyDTO);

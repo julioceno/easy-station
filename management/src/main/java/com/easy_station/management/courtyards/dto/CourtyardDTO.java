@@ -1,6 +1,6 @@
 package com.easy_station.management.courtyards.dto;
 
-import com.easy_station.management.courtyards.database.Courtyard;
+import com.easy_station.management.courtyards.domain.Courtyard;
 import lombok.*;
 
 @Getter

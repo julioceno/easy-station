@@ -3,6 +3,7 @@ package com.easy_station.management.users;
 import com.easy_station.management.users.dto.CreateUserDTO;
 import com.easy_station.management.users.dto.UserDTO;
 import com.easy_station.management.users.services.UsersService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +18,7 @@ public class UsersController {
     private UsersService userService;
 
     @PostMapping
-    public ResponseEntity<UserDTO> create(@RequestBody CreateUserDTO dto) {
-        System.out.println(dto.toString());
+    public ResponseEntity<UserDTO> create(@RequestBody @Valid CreateUserDTO dto) {
         UserDTO userDTO = userService.create(dto);
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()

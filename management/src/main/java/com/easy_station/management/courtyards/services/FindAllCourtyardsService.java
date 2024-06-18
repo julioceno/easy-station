@@ -1,7 +1,7 @@
 package com.easy_station.management.courtyards.services;
 
-import com.easy_station.management.courtyards.database.Courtyard;
-import com.easy_station.management.courtyards.database.CourtyardsRepository;
+import com.easy_station.management.courtyards.domain.Courtyard;
+import com.easy_station.management.courtyards.domain.CourtyardsRepository;
 import com.easy_station.management.courtyards.dto.CourtyardDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

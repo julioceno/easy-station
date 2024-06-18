@@ -1,6 +1,6 @@
 package com.easy_station.management.courtyards.services;
 
-import com.easy_station.management.courtyards.database.CourtyardsRepository;
+import com.easy_station.management.courtyards.domain.CourtyardsRepository;
 import com.easy_station.management.exceptions.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

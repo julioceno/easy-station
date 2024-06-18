@@ -1,4 +1,4 @@
-package com.easy_station.management.courtyards.database;
+package com.easy_station.management.courtyards.domain;
 
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;

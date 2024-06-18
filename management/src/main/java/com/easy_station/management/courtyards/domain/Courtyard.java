@@ -1,31 +1,31 @@
-package com.easy_station.management.users.database;
+package com.easy_station.management.courtyards.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.Date;
 
-@Entity(name = "users")
-@Table(name = "users")
-@AllArgsConstructor
+@Table(name = "courtyards")
+@Entity(name = "courtyards")
 @NoArgsConstructor
-@Setter
-@Getter
-@ToString
+@AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 @EntityListeners(AuditingEntityListener.class)
-public class User {
+@Getter
+@Setter
+public class Courtyard {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    @Column(unique = true)
-    private String email;
+    @Column(nullable = false)
+    private String name;
 
-    @Column(name = "external_id", unique = true)
-    private String externalId;
+    @Column(nullable = false)
+    private Integer maxCars;
 
     @Column(name = "company_id")
     private String companyId;
@@ -34,6 +34,7 @@ public class User {
     @Column(name = "created_at", nullable = false)
     private Date createdAt;
 
+    @LastModifiedDate
     @Column(name = "updated_at", nullable = false)
     private Date updatedAt;
 }
