@@ -37,6 +37,7 @@ public class AuthInterceptor implements HandlerInterceptor {
             logger.info("User is authenticated");
             setCompanyIdInRequest(token, request);
 
+            logger.info("Authorized user");
             return true;
         }
         catch (RuntimeException err) {

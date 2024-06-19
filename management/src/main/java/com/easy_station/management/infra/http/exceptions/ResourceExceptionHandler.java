@@ -50,9 +50,10 @@ public class ResourceExceptionHandler {
 
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<StandardError> internalServerError(
-            UnauthorizedException e,
+            RuntimeException e,
             HttpServletRequest request
     ) {
+        e.printStackTrace();
         String error = "Internal Server Error";
         HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
         String message = "Ocorreu um erro inesperado, entre em contato com o suporte.";

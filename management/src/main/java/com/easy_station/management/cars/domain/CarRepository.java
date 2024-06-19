@@ -6,11 +6,11 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.Optional;
 
 public interface CarRepository extends JpaRepository<Car, String> {
-    @Query("\n " +
-            "select * from cars \n" +
-            "join courtyards ON cars.courtyard_id = courtyards.id \n" +
-            "join companies on courtyards.company_id = companies.id\n" +
-            "where cars.plate = ?1 and companies.id = ?2" +
-            "\n")
+    @Query(value = "\n " +
+            "select cars.* from cars \n" +
+            "join courtyards ON cars.courtyard_id = courtyards.id  \n" +
+            "join companies on courtyards.company_id = companies.id \n" +
+            "where cars.plate = ?1 and companies.id = ?2 LIMIT 1" +
+            "\n", nativeQuery = true)
     Optional<Car> findActiveCarByPlateAndCompanyId(String plate, String companyId);
 }
