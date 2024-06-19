@@ -9,8 +9,13 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class CarsService {
     private final CheckInService checkInService;
+    private final CheckOutService checkOutService;
 
     public CarDTO checkIn(CreateCarDTO dto, String companyId) {
         return checkInService.run(dto, companyId);
+    }
+
+    public CarDTO checkOut(String id, String companyId) {
+        return checkOutService.run(id, companyId);
     }
 }

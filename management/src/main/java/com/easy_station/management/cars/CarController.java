@@ -17,7 +17,7 @@ public class CarController {
     @Autowired
     private CarsService carsService;
 
-    @PostMapping
+    @PostMapping("check-in")
     public ResponseEntity<CarDTO> checkIn(@RequestAttribute("companyId") String companyId, @RequestBody @Valid CreateCarDTO dto) {
         CarDTO carDTO = carsService.checkIn(dto, companyId);
         URI uri = ServletUriComponentsBuilder
@@ -27,5 +27,11 @@ public class CarController {
                 .toUri();
 
         return ResponseEntity.created(uri).body(carDTO);
+    }
+
+    @PostMapping("/check-out/{id}")
+    public ResponseEntity<CarDTO> checkOut(@RequestAttribute("companyId") String companyId, @PathVariable("id") String id) {
+        CarDTO carDTO = carsService.checkOut(id, companyId);
+        return ResponseEntity.ok(carDTO);
     }
 }
