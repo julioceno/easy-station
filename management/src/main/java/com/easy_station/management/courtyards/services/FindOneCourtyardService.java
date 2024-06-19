@@ -3,7 +3,7 @@ package com.easy_station.management.courtyards.services;
 import com.easy_station.management.courtyards.domain.Courtyard;
 import com.easy_station.management.courtyards.domain.CourtyardsRepository;
 import com.easy_station.management.courtyards.dto.CourtyardDTO;
-import com.easy_station.management.exceptions.NotFoundException;
+import com.easy_station.management.common.exceptions.NotFoundException;
 import com.easy_station.management.infra.http.interceptors.AuthInterceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

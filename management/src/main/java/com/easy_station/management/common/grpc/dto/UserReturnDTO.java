@@ -1,4 +1,4 @@
-package com.easy_station.management.grpc.dto;
+package com.easy_station.management.common.grpc.dto;
 
 import br.com.easy_station.sso.Company;
 import br.com.easy_station.sso.Role;

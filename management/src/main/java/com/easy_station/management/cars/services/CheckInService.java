@@ -6,7 +6,7 @@ import com.easy_station.management.cars.dto.CarDTO;
 import com.easy_station.management.cars.dto.CreateCarDTO;
 import com.easy_station.management.companies.dto.CompanyDTO;
 import com.easy_station.management.companies.services.FindOneCompanyService;
-import com.easy_station.management.exceptions.BadRequestException;
+import com.easy_station.management.common.exceptions.BadRequestException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

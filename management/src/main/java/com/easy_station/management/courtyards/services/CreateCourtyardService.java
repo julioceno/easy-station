@@ -4,7 +4,7 @@ import com.easy_station.management.courtyards.domain.Courtyard;
 import com.easy_station.management.courtyards.domain.CourtyardsRepository;
 import com.easy_station.management.courtyards.dto.CourtyardDTO;
 import com.easy_station.management.courtyards.dto.CreateCourtyardDTO;
-import com.easy_station.management.exceptions.BadRequestException;
+import com.easy_station.management.common.exceptions.BadRequestException;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

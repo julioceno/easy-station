@@ -1,9 +1,9 @@
-package com.easy_station.management.grpc;
+package com.easy_station.management.common.grpc;
 
 import br.com.easy_station.sso.*;
 import com.easy_station.management.auth.dto.AuthDTO;
 import com.easy_station.management.auth.dto.SignInDTO;
-import com.easy_station.management.grpc.dto.UserReturnDTO;
+import com.easy_station.management.common.grpc.dto.UserReturnDTO;
 import com.easy_station.management.infra.grpc.ApiKeyClientInterceptor;
 import com.easy_station.management.users.dto.UserDTO;
 import net.devh.boot.grpc.client.inject.GrpcClient;

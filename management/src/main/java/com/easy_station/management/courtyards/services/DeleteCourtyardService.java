@@ -1,7 +1,7 @@
 package com.easy_station.management.courtyards.services;
 
 import com.easy_station.management.courtyards.domain.CourtyardsRepository;
-import com.easy_station.management.exceptions.NotFoundException;
+import com.easy_station.management.common.exceptions.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,7 @@
 package com.easy_station.management;
 
-import com.easy_station.management.grpc.SSOClientService;
-import com.easy_station.management.grpc.dto.UserReturnDTO;
+import com.easy_station.management.common.grpc.SSOClientService;
+import com.easy_station.management.common.grpc.dto.UserReturnDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;

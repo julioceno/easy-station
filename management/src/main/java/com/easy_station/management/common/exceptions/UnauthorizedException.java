@@ -1,4 +1,4 @@
-package com.easy_station.management.exceptions;
+package com.easy_station.management.common.exceptions;
 
 public class UnauthorizedException extends RuntimeException {
     public UnauthorizedException() {

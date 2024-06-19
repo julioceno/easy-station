@@ -2,8 +2,8 @@ package com.easy_station.management.infra.http.interceptors;
 
 import com.easy_station.management.common.services.GetCompanyIdByTokenService;
 import com.easy_station.management.common.utils.Utils;
-import com.easy_station.management.exceptions.UnauthorizedException;
-import com.easy_station.management.grpc.SSOClientService;
+import com.easy_station.management.common.exceptions.UnauthorizedException;
+import com.easy_station.management.common.grpc.SSOClientService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;

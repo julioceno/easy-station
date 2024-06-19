@@ -2,8 +2,8 @@ package com.easy_station.management.users.services;
 
 import com.easy_station.management.companies.dto.CompanyDTO;
 import com.easy_station.management.companies.services.FindOneCompanyService;
-import com.easy_station.management.grpc.SSOClientService;
-import com.easy_station.management.grpc.dto.UserReturnDTO;
+import com.easy_station.management.common.grpc.SSOClientService;
+import com.easy_station.management.common.grpc.dto.UserReturnDTO;
 import com.easy_station.management.users.dto.CreateUserDTO;
 import com.easy_station.management.users.dto.UserDTO;
 import org.slf4j.Logger;

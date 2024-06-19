@@ -1,8 +1,7 @@
 package com.easy_station.management.common.services;
 
-import com.easy_station.management.common.utils.Utils;
-import com.easy_station.management.exceptions.NotFoundException;
-import com.easy_station.management.grpc.SSOClientService;
+import com.easy_station.management.common.exceptions.NotFoundException;
+import com.easy_station.management.common.grpc.SSOClientService;
 import com.easy_station.management.users.database.User;
 import com.easy_station.management.users.database.UserRepository;
 import org.slf4j.Logger;

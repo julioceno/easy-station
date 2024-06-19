@@ -1,4 +1,4 @@
-package com.easy_station.management.grpc.dto;
+package com.easy_station.management.common.grpc.dto;
 
 public enum UserRoleEnum {
     ADMIN("admin"),
