@@ -1,5 +1,6 @@
 package com.easy_station.management.cars;
 
+import com.easy_station.management.cars.dto.CalculatemountToChargedDTO;
 import com.easy_station.management.cars.dto.CarDTO;
 import com.easy_station.management.cars.dto.CreateCarDTO;
 import com.easy_station.management.cars.services.CarsService;
@@ -40,5 +41,17 @@ public class CarController {
     public ResponseEntity<List<CarDTO>> findAll(@RequestAttribute("companyId") String companyId) {
         List<CarDTO> list = carsService.findAll(companyId);
         return ResponseEntity.ok(list);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<CarDTO> findOne(@RequestAttribute("companyId") String companyId, @PathVariable("id") String id) {
+        CarDTO carDTO = carsService.findOne(id, companyId);
+        return ResponseEntity.ok(carDTO);
+    }
+
+    @GetMapping("/{id}/calculate-price")
+    public ResponseEntity<CalculatemountToChargedDTO> calculatePrice(@RequestAttribute("companyId") String companyId, @PathVariable("id") String id) {
+        CalculatemountToChargedDTO value = carsService.calculateAmountToCharged(id, companyId);
+        return ResponseEntity.ok(value);
     }
 }

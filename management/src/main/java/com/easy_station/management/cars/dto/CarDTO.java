@@ -17,6 +17,7 @@ public class CarDTO {
     private String ownerName;
     private String plate;
     private String courtyardId;
+    private Double hourPrice;
     private Date checkIn;
     private Date checkOut;
 
@@ -25,6 +26,7 @@ public class CarDTO {
         this.ownerName = car.getOwnerName();
         this.plate = car.getPlate();
         this.courtyardId = car.getCourtyardId();
+        this.hourPrice = car.getHourPrice();
         this.checkIn = car.getCreatedAt();
         this.checkOut = car.getUpdatedAt();
     }
