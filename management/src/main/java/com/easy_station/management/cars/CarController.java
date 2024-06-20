@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/cars")
@@ -33,5 +34,11 @@ public class CarController {
     public ResponseEntity<CarDTO> checkOut(@RequestAttribute("companyId") String companyId, @PathVariable("id") String id) {
         CarDTO carDTO = carsService.checkOut(id, companyId);
         return ResponseEntity.ok(carDTO);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<CarDTO>> findAll(@RequestAttribute("companyId") String companyId) {
+        List<CarDTO> list = carsService.findAll(companyId);
+        return ResponseEntity.ok(list);
     }
 }

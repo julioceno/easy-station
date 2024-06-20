@@ -3,6 +3,7 @@ package com.easy_station.management.cars.domain;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface CarRepository extends JpaRepository<Car, String> {
@@ -22,4 +23,13 @@ public interface CarRepository extends JpaRepository<Car, String> {
             "\n", nativeQuery = true
     )
     Optional<Car> findCarByIdAndCompanyId(String id, String companyId);
+
+    @Query(value = "\n " +
+            "select cars.* from cars \n" +
+            "join courtyards ON cars.courtyard_id = courtyards.id  \n" +
+            "join companies on courtyards.company_id = companies.id \n" +
+            "where companies.id = ?1" +
+            "\n", nativeQuery = true
+    )
+    List<Car> findAllCarsByCompanyId(String companyId);
 }
