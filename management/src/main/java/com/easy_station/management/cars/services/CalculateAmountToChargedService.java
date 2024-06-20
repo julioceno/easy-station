@@ -8,7 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.DecimalFormat;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.Duration;
 import java.util.Date;
 import static java.lang.String.*;
@@ -16,8 +17,6 @@ import static java.lang.String.*;
 @Service
 public class CalculateAmountToChargedService {
     private final Logger logger = LoggerFactory.getLogger(CalculateAmountToChargedService.class.getName());
-    private final DecimalFormat df = new DecimalFormat("#.00");
-
 
     @Autowired
     private CarRepository carRepository;
@@ -29,10 +28,10 @@ public class CalculateAmountToChargedService {
         CarDTO car = findOneCarService.run(id, companyId);
 
         double primitiveValue = calculateBeetwenMinutes(car);
-        String value = df.format(primitiveValue);
+        String formattedValue = formatValue(primitiveValue);
 
         logger.info("Return data in dto pattern...");
-        return new CalculatemountToChargedDTO(value);
+        return new CalculatemountToChargedDTO(formattedValue);
     }
 
     private Date getCurrentDate() {
@@ -48,5 +47,11 @@ public class CalculateAmountToChargedService {
         logger.info(format("Value caulated %s", value));
 
         return value;
+    }
+
+    private String formatValue(double value) {
+        return new BigDecimal(value)
+                .setScale(2, RoundingMode.HALF_UP)
+                .toString();
     }
 }
