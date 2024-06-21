@@ -24,7 +24,12 @@ public class CheckInService {
     @Autowired
     private FindOneCompanyService findOneCompanyService;
 
+    @Autowired
+    private ValidateLimitCarsInCourtyardService ValidateCarsInCourtyardService;
+
     public CarDTO run(CreateCarDTO dto, String companyId) {
+        logger.info("Calling validateCarsInCourtyardService and invoking run method...");
+        ValidateCarsInCourtyardService.run(dto.courtyardId(), companyId);
         throwIfAlreadyCarActive(dto.plate(), companyId);
         Car carCreated = createCar(dto, companyId);
 
