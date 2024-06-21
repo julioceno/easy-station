@@ -1,5 +1,7 @@
 package com.easy_station.management.infra.http.interceptors;
 
+import com.easy_station.management.common.annotation.Role;
+import com.easy_station.management.common.enums.UserRoleEnum;
 import com.easy_station.management.common.services.GetCompanyIdByTokenService;
 import com.easy_station.management.common.utils.Utils;
 import com.easy_station.management.common.exceptions.UnauthorizedException;
@@ -10,7 +12,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
+
+import java.lang.reflect.Method;
+import java.util.Arrays;
 
 import static java.lang.String.*;
 
@@ -35,6 +41,7 @@ public class AuthInterceptor implements HandlerInterceptor {
         try {
             ssoClientService.validateToken(token);
             logger.info("User is authenticated");
+            validateRole(handler, UserRoleEnum.USER);
             setCompanyIdInRequest(token, request);
 
             logger.info("Authorized user");
@@ -52,4 +59,38 @@ public class AuthInterceptor implements HandlerInterceptor {
         logger.info(format("CompanyId with id %s got, set in attribute request", companyId));
         request.setAttribute("companyId", companyId);
     }
+
+    private void validateRole(Object handler, UserRoleEnum userRole) {
+        boolean hasRole = hasRole(handler, userRole);
+        if (!hasRole) {
+            logger.error("throwing error...");
+            throw new UnauthorizedException();
+        }
+    }
+
+
+    private boolean hasRole(Object handler, UserRoleEnum userRole) {
+        HandlerMethod handlerMethod = (HandlerMethod) handler;
+        Method method = handlerMethod.getMethod();
+
+        if (!method.isAnnotationPresent(Role.class)) {
+            return false;
+        }
+
+        logger.info("Validating roles...");
+        Role role = method.getAnnotation(Role.class);
+        UserRoleEnum[] allowedRoles = role.value();
+
+        logger.info(format("%s allowedRoles roles", Arrays.toString(allowedRoles)));
+        for (UserRoleEnum userRoleEnum : allowedRoles) {
+            if (userRoleEnum == userRole) {
+                logger.info("User can access this route");
+                return true;
+            }
+        }
+
+        logger.error("User not can access");
+        return false;
+    }
+
 }
