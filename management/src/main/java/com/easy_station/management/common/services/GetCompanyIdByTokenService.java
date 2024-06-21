@@ -2,8 +2,8 @@ package com.easy_station.management.common.services;
 
 import com.easy_station.management.common.exceptions.NotFoundException;
 import com.easy_station.management.common.grpc.SSOClientService;
-import com.easy_station.management.users.database.User;
-import com.easy_station.management.users.database.UserRepository;
+import com.easy_station.management.users.domain.User;
+import com.easy_station.management.users.domain.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,8 +1,6 @@
 package com.easy_station.management.common.grpc;
 
 import br.com.easy_station.sso.*;
-import com.easy_station.management.auth.dto.AuthDTO;
-import com.easy_station.management.auth.dto.SignInDTO;
 import com.easy_station.management.common.grpc.dto.UserReturnDTO;
 import com.easy_station.management.infra.grpc.ApiKeyClientInterceptor;
 import com.easy_station.management.users.dto.UserDTO;
@@ -27,19 +25,6 @@ public class SSOClientService {
 
         logger.info("User obtained, convert DTO and return user...");
         return new UserReturnDTO(response);
-    }
-
-    public SignInDTO login(AuthDTO dto) {
-        logger.info(format("Login user with email %s", dto.email()));
-
-        LoginParams request = LoginParams.newBuilder()
-                .setEmail(dto.email())
-                .setPassword(dto.password())
-                .build();
-
-        TokensResponse tokensResponse = ssoServiceBlockingStub.login(request);
-
-        return new SignInDTO(tokensResponse.getToken(), tokensResponse.getRefreshToken());
     }
 
     public UserReturnDTO update(UserDTO userDTO) {

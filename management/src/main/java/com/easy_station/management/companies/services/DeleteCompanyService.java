@@ -1,6 +1,6 @@
 package com.easy_station.management.companies.services;
 
-import com.easy_station.management.companies.database.CompanyRepository;
+import com.easy_station.management.companies.domain.CompanyRepository;
 import com.easy_station.management.common.exceptions.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

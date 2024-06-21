@@ -1,4 +1,4 @@
-package com.easy_station.management.users.database;
+package com.easy_station.management.users.domain;
 
 import jakarta.persistence.*;
 import lombok.*;

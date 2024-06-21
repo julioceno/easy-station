@@ -1,6 +1,6 @@
 package com.easy_station.management.companies.dto;
 
-import com.easy_station.management.companies.database.Company;
+import com.easy_station.management.companies.domain.Company;
 import lombok.*;
 
 @NoArgsConstructor

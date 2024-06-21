@@ -1,7 +1,7 @@
 package com.easy_station.management.companies.services;
 
-import com.easy_station.management.companies.database.Company;
-import com.easy_station.management.companies.database.CompanyRepository;
+import com.easy_station.management.companies.domain.Company;
+import com.easy_station.management.companies.domain.CompanyRepository;
 import com.easy_station.management.companies.dto.CompanyDTO;
 import com.easy_station.management.common.exceptions.NotFoundException;
 import org.slf4j.Logger;

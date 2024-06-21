@@ -1,6 +1,6 @@
-package com.easy_station.management.companies.database;
+package com.easy_station.management.companies.domain;
 
-import com.easy_station.management.users.database.User;
+import com.easy_station.management.users.domain.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
