@@ -1,5 +1,7 @@
 package com.easy_station.management.courtyards.domain;
 
+import com.easy_station.management.common.annotation.Role;
+import com.easy_station.management.common.enums.UserRoleEnum;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -16,6 +18,7 @@ import java.util.Date;
 @EntityListeners(AuditingEntityListener.class)
 @Getter
 @Setter
+@Role(UserRoleEnum.ADMIN)
 public class Courtyard {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

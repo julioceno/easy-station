@@ -1,5 +1,7 @@
 package com.easy_station.management.courtyards;
 
+import com.easy_station.management.common.annotation.Role;
+import com.easy_station.management.common.enums.UserRoleEnum;
 import com.easy_station.management.common.services.GetCompanyIdByTokenService;
 import com.easy_station.management.courtyards.dto.CourtyardDTO;
 import com.easy_station.management.courtyards.dto.CreateCourtyardDTO;
@@ -22,18 +24,21 @@ public class CourtyardsController {
     @Autowired
     GetCompanyIdByTokenService getCompanyIdByTokenService;
 
+    @Role(UserRoleEnum.USER)
     @GetMapping
     public ResponseEntity<List<CourtyardDTO>> findAll(@RequestAttribute("companyId") String companyId) {
         List<CourtyardDTO> list = courtyardsService.findAll(companyId);
         return ResponseEntity.ok(list);
     }
 
+    @Role(UserRoleEnum.USER)
     @GetMapping("/{id}")
     public ResponseEntity<CourtyardDTO> findOne(@RequestAttribute("companyId") String companyId, @PathVariable String id) {
         CourtyardDTO courtyardDTO = courtyardsService.findOne(id, companyId);
         return ResponseEntity.ok(courtyardDTO);
     }
 
+    @Role(UserRoleEnum.USER)
     @PostMapping
     public ResponseEntity<CourtyardDTO> create(@RequestAttribute("companyId") String companyId, @RequestBody CreateCourtyardDTO dto) {
         CourtyardDTO courtyardDTO = courtyardsService.create(dto, companyId);
@@ -46,12 +51,14 @@ public class CourtyardsController {
         return ResponseEntity.created(uri).body(courtyardDTO);
     }
 
+    @Role(UserRoleEnum.USER)
     @PutMapping("/{id}")
     public ResponseEntity<CourtyardDTO> update(@RequestAttribute("companyId") String companyId, @RequestBody UpdateCourtyardDTO dto, @PathVariable String id) {
         CourtyardDTO courtyardDTO = courtyardsService.update(id, dto, companyId);
         return ResponseEntity.ok(courtyardDTO);
     }
 
+    @Role(UserRoleEnum.USER)
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@RequestAttribute("companyId") String companyId, @PathVariable String id) {
         courtyardsService.delete(id, companyId);

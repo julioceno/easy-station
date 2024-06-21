@@ -1,5 +1,7 @@
 package com.easy_station.management.users;
 
+import com.easy_station.management.common.annotation.Role;
+import com.easy_station.management.common.enums.UserRoleEnum;
 import com.easy_station.management.users.dto.CreateUserDTO;
 import com.easy_station.management.users.dto.UserDTO;
 import com.easy_station.management.users.services.UsersService;
@@ -17,6 +19,7 @@ public class UsersController {
     @Autowired
     private UsersService userService;
 
+    @Role(UserRoleEnum.ADMIN)
     @PostMapping
     public ResponseEntity<UserDTO> create(@RequestBody @Valid CreateUserDTO dto) {
         UserDTO userDTO = userService.create(dto);
