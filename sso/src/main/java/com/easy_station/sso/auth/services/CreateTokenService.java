@@ -6,6 +6,9 @@ import com.auth0.jwt.exceptions.JWTCreationException;
 import com.easy_station.sso.auth.dto.SignInDTO;
 import com.easy_station.sso.exceptions.UnauthorizedException;
 import com.easy_station.sso.users.domain.User;
+import com.easy_station.sso.users.dto.SubjectDTO;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -18,14 +21,19 @@ public class CreateTokenService {
     private String secret;
 
     public String run(User user){
+        SubjectDTO subjectDTO = new SubjectDTO(user.getEmail(), user.getRole());
+
         try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            String subjectJson = objectMapper.writeValueAsString(subjectDTO);
+
             Algorithm algorithm = Algorithm.HMAC256(secret);
             return JWT.create()
                     .withIssuer("easy-station-sso")
-                    .withSubject(user.getEmail())
+                    .withSubject(subjectJson)
                     .withExpiresAt(this.generateExpirationDate())
                     .sign(algorithm);
-        } catch (JWTCreationException exception){
+        } catch (JWTCreationException | JsonProcessingException exception){
             throw new UnauthorizedException("Não é possível autenticar o usuário.");
         }
     }
@@ -33,7 +41,7 @@ public class CreateTokenService {
     private Instant generateExpirationDate(){
         return Instant
                 .now()
-                .plus(Duration.ofMinutes(30));
+                .plus(Duration.ofHours(30)); // TODO Diminuir o tempo
     }
 
 }

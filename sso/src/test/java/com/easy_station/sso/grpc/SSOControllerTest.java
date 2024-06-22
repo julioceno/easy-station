@@ -3,6 +3,7 @@ package com.easy_station.sso.grpc;
 import br.com.easy_station.sso.*;
 import com.easy_station.sso.auth.dto.SignInDTO;
 import com.easy_station.sso.auth.services.AuthService;
+import com.easy_station.sso.common.grpc.SSOController;
 import com.easy_station.sso.users.dto.CompanyDTO;
 import com.easy_station.sso.users.dto.UserReturnDTO;
 import com.easy_station.sso.users.dto.UserRoleEnum;
