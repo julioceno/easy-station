@@ -1,6 +1,7 @@
 package com.easy_station.management.infra.http.interceptors;
 
 import com.easy_station.management.common.annotation.Role;
+import com.easy_station.management.common.dto.SubjectDTO;
 import com.easy_station.management.common.enums.UserRoleEnum;
 import com.easy_station.management.common.services.GetCompanyIdByTokenService;
 import com.easy_station.management.common.utils.Utils;
@@ -39,9 +40,9 @@ public class AuthInterceptor implements HandlerInterceptor {
         logger.info("Validate token...");
 
         try {
-            ssoClientService.validateToken(token);
-            logger.info("User is authenticated");
-            validateRole(handler, UserRoleEnum.USER);
+           SubjectDTO subjectDTO = ssoClientService.validateToken(token);
+            logger.info(format("User %s is authenticated", subjectDTO.email()));
+            validateRole(handler, subjectDTO.role());
             setCompanyIdInRequest(token, request);
 
             logger.info("Authorized user");

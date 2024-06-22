@@ -8,7 +8,6 @@ package SSO_EASY_STATION;
 service SSOService {
   rpc findById(FindUserByIdParams) returns (User) {}
   rpc update(UpdateUserParams) returns (User) {}
-  rpc login(LoginParams) returns (TokensResponse) {}
   rpc validateToken(ValidateTokenParams) returns (ValidateTokenResponse) {}
   rpc refreshToken(RefreshTokenParams) returns (TokensResponse) {};
 }
@@ -40,19 +39,13 @@ enum Role {
   USER= 1;
 }
 
-/* Login */
-message LoginParams {
-  string email = 1;
-  string password = 2;
-}
-
 /* VALIDATE TOKEN */
 message ValidateTokenParams {
   string token = 1;
 }
 
 message ValidateTokenResponse {
-  string email = 1;
+  string subject = 1;
 }
 
 /* Refresh token */

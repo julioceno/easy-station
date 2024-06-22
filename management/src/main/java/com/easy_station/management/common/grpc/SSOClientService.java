@@ -1,9 +1,13 @@
 package com.easy_station.management.common.grpc;
 
 import br.com.easy_station.sso.*;
+import com.easy_station.management.common.dto.SubjectDTO;
+import com.easy_station.management.common.exceptions.UnauthorizedException;
 import com.easy_station.management.common.grpc.dto.UserReturnDTO;
 import com.easy_station.management.infra.grpc.ApiKeyClientInterceptor;
 import com.easy_station.management.users.dto.UserDTO;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import net.devh.boot.grpc.client.inject.GrpcClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,7 +51,7 @@ public class SSOClientService {
         return new UserReturnDTO(response);
     }
 
-    public String validateToken(String token) {
+    public SubjectDTO validateToken(String token) {
         logger.info("Create call in method validateToken");
         ValidateTokenParams request = ValidateTokenParams
                 .newBuilder()
@@ -55,9 +59,15 @@ public class SSOClientService {
                 .build();
 
         ValidateTokenResponse response = ssoServiceBlockingStub.validateToken(request);
-
         logger.info("Token validated");
-        return response.getEmail();
+
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            return objectMapper.readValue(response.getSubject(), SubjectDTO.class);
+        } catch (JsonProcessingException e) {
+            logger.error("Error in json");
+            throw new UnauthorizedException();
+        }
     }
 
 }

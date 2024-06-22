@@ -1,5 +1,6 @@
 package com.easy_station.management.common.services;
 
+import com.easy_station.management.common.dto.SubjectDTO;
 import com.easy_station.management.common.exceptions.NotFoundException;
 import com.easy_station.management.common.grpc.SSOClientService;
 import com.easy_station.management.users.domain.User;
@@ -22,8 +23,8 @@ public class GetCompanyIdByTokenService {
     private SSOClientService ssoClientService;
 
     public String run(String token) {
-        String email = ssoClientService.validateToken(token);
-        User user = getUser(email);
+        SubjectDTO subjectDTO = ssoClientService.validateToken(token);
+        User user = getUser(subjectDTO.email());
 
         logger.info("Return company id...");
         return user.getCompanyId();

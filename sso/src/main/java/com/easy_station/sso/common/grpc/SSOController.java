@@ -1,4 +1,4 @@
-package com.easy_station.sso.grpc;
+package com.easy_station.sso.common.grpc;
 
 import br.com.easy_station.sso.*;
 import com.easy_station.sso.auth.dto.AuthDTO;
@@ -48,26 +48,11 @@ public class SSOController extends SSOServiceGrpc.SSOServiceImplBase {
 
     @Override
     public void validateToken(ValidateTokenParams request, StreamObserver<ValidateTokenResponse> responseObserver) {
-        String email = authService.validateToken(request.getToken());
+        String subject = authService.validateToken(request.getToken());
 
         ValidateTokenResponse response = ValidateTokenResponse
                 .newBuilder()
-                .setEmail(email)
-                .build();
-
-        responseObserver.onNext(response);
-        responseObserver.onCompleted();
-    }
-
-    @Override
-    public void login(LoginParams request, StreamObserver<TokensResponse> responseObserver) {
-        AuthDTO authDTO = new AuthDTO(request.getEmail(), request.getPassword());
-        SignInDTO signInDTO = authService.signIn(authDTO);
-
-        TokensResponse response = TokensResponse
-                .newBuilder()
-                .setToken(signInDTO.token())
-                .setRefreshToken(signInDTO.refreshToken())
+                .setSubject(subject)
                 .build();
 
         responseObserver.onNext(response);
