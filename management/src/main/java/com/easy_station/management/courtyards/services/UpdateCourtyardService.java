@@ -23,11 +23,21 @@ public class UpdateCourtyardService {
     public CourtyardDTO run(String id, UpdateCourtyardDTO dto, String companyId) {
         Courtyard currendCourtyard = getCourtyardAndThrowIfNotExists(id, companyId);
         verifyIfNameAlreadyUsedByOtherCourtyard(id, dto.name(), companyId);
-
         Courtyard courtyardUpdated = updateCourtyard(currendCourtyard, dto);
 
         logger.info("Return courtyard in patten dto...");
         return new CourtyardDTO(courtyardUpdated);
+    }
+
+    private Courtyard getCourtyardAndThrowIfNotExists(String id, String companyUd) {
+        logger.info(format("Finding company by id %s and companyId %s...", id, companyUd));
+        Courtyard courtyard = courtyardsRepository.findByIdAndCompanyId(id, companyUd).orElseThrow(() -> {
+            logger.error(format("Courtyard with id %s not exists", id));
+            return new NotFoundException(format("Pátio com o id %s não existe", id));
+        });
+
+        logger.info("Courtyard found, return...");
+        return courtyard;
     }
 
     private void verifyIfNameAlreadyUsedByOtherCourtyard(String id, String name, String companyId) {
@@ -40,17 +50,6 @@ public class UpdateCourtyardService {
         }
 
         logger.info("Not exists other courtyard with same name");
-    }
-
-    private Courtyard getCourtyardAndThrowIfNotExists(String id, String companyUd) {
-        logger.info(format("Finding company by id %s and companyId %s...", id, companyUd));
-        Courtyard courtyard = courtyardsRepository.findByIdAndCompanyId(id, companyUd).orElseThrow(() -> {
-            logger.error(format("Courtyard with id %s not exists", id));
-            return new NotFoundException(format("Pátio com o id %s não existe", id));
-        });
-
-        logger.info("Courtyard found, return...");
-        return courtyard;
     }
 
     private Courtyard updateCourtyard(Courtyard currendCourtyard, UpdateCourtyardDTO dto) {

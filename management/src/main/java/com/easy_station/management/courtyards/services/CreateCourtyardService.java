@@ -31,7 +31,7 @@ public class CreateCourtyardService {
         Courtyard courtyard = courtyardsRepository.findByNameAndCompanyId(name, companyUd).orElse(null);
         if (courtyard != null) {
             logger.error(format("Courtyard with name %s already exists", name));
-            throw new BadRequestException(format("Pátio com nome %s já existe para essa empresa.", name ));
+            throw new BadRequestException(format("Pátio com nome %s já existe para essa empresa.", name));
         }
 
         logger.info("Courtyard not found");

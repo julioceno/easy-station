@@ -30,7 +30,7 @@ public class FindOneCourtyardService {
         logger.info(format("Getting courtyard by id %s and company id %s...", id, companyId));
         Courtyard courtyard = courtyardsRepository.findByIdAndCompanyId(id, companyId).orElseThrow(() -> {
             logger.error("Courtyard not found");
-            return new NotFoundException("Patio não foi encontrado.");
+            return new NotFoundException(format("Pátio de id %s não existe", id));
         });
 
         logger.info("Courtyard found");

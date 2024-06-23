@@ -62,20 +62,20 @@ public class AuthInterceptor implements HandlerInterceptor {
     }
 
     private void validateRole(Object handler, UserRoleEnum userRole) {
-        boolean hasRole = hasRole(handler, userRole);
-        if (!hasRole) {
+        boolean canAccess = canAccessRoute(handler, userRole);
+        if (!canAccess) {
             logger.error("throwing error...");
             throw new UnauthorizedException();
         }
     }
 
 
-    private boolean hasRole(Object handler, UserRoleEnum userRole) {
+    private boolean canAccessRoute(Object handler, UserRoleEnum userRole) {
         HandlerMethod handlerMethod = (HandlerMethod) handler;
         Method method = handlerMethod.getMethod();
 
         if (!method.isAnnotationPresent(Role.class)) {
-            return false;
+            return true;
         }
 
         logger.info("Validating roles...");

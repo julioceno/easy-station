@@ -62,14 +62,13 @@ public class CompanyController {
     @Role(UserRoleEnum.USER)
     @GetMapping("/my-company")
     ResponseEntity<CompanyDTO> findOneByUser(
-            @RequestAttribute("companyId") String companyId,
-            @PathVariable String id
+            @RequestAttribute("companyId") String companyId
     ) {
-        CompanyDTO companyDTO = companyService.findOne(id);
+        CompanyDTO companyDTO = companyService.findOne(companyId);
         return ResponseEntity.ok(companyDTO);
     }
 
-    @Role(UserRoleEnum.ADMIN)
+    @Role(UserRoleEnum.USER)
     @PutMapping("/my-company")
     ResponseEntity<CompanyDTO> updateByUser(
             @RequestAttribute("companyId") String companyId,

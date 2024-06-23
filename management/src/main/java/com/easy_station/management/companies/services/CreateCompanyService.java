@@ -21,6 +21,7 @@ public class CreateCompanyService {
     public CompanyDTO run(CreateCompanyDTO dto) {
         Company builtCompany = buildCompany(dto);
 
+        System.out.println(companyRepository);
         logger.info("Saving company...");
         Company companyCreated = companyRepository.save(builtCompany);
         logger.info("Company saved, return company in DTO patten...");

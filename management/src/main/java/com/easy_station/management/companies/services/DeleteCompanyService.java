@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import static java.lang.String.format;
 
-// TODO: verificar a regra de negocio se vale deletar os usuarios antes de apagar a empresa
 @Service
 public class DeleteCompanyService {
     private static final Logger logger = LoggerFactory.getLogger(DeleteCompanyService.class.getName());

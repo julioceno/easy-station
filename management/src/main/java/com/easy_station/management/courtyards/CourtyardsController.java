@@ -21,9 +21,6 @@ public class CourtyardsController {
     @Autowired
     CourtyardsService courtyardsService;
 
-    @Autowired
-    GetCompanyIdByTokenService getCompanyIdByTokenService;
-
     @Role(UserRoleEnum.USER)
     @GetMapping
     public ResponseEntity<List<CourtyardDTO>> findAll(@RequestAttribute("companyId") String companyId) {
@@ -53,7 +50,7 @@ public class CourtyardsController {
 
     @Role(UserRoleEnum.USER)
     @PutMapping("/{id}")
-    public ResponseEntity<CourtyardDTO> update(@RequestAttribute("companyId") String companyId, @RequestBody UpdateCourtyardDTO dto, @PathVariable String id) {
+    public ResponseEntity<CourtyardDTO> update(@RequestAttribute("companyId") String companyId, @PathVariable String id, @RequestBody UpdateCourtyardDTO dto) {
         CourtyardDTO courtyardDTO = courtyardsService.update(id, dto, companyId);
         return ResponseEntity.ok(courtyardDTO);
     }

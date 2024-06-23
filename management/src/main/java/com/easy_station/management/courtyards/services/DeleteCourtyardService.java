@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import static java.lang.String.*;
+import static java.lang.String.format;
 
 @Service
 public class DeleteCourtyardService {
@@ -24,7 +25,7 @@ public class DeleteCourtyardService {
         logger.info(format("Getting courtyard by id %s and companyId %s", id, companyId));
         courtyardsRepository.findByIdAndCompanyId(id, companyId).orElseThrow(() -> {
             logger.error("Courtyard not exists, throw error...");
-            return new NotFoundException("Pátio não existe");
+            return new NotFoundException(format("Pátio de id %s não existe", id));
         });
 
         logger.info("Courtyard found");
