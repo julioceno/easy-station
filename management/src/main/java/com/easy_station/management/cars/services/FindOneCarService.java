@@ -28,7 +28,7 @@ public class FindOneCarService {
         logger.info(format("Finding cars by id %s in company %s", id, companyId));
         Car car = carRepository.findCarByIdAndCompanyId(id, companyId).orElseThrow(() -> {
             logger.error("Car not found");
-            return new NotFoundException("Veículo não encontrado.");
+            return new NotFoundException(format("Veículo de id %s não encontrado.", id));
         });
 
         logger.info("Car found");
