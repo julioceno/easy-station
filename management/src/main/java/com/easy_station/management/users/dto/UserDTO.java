@@ -1,6 +1,7 @@
 package com.easy_station.management.users.dto;
 
 import com.easy_station.management.companies.dto.CompanyDTO;
+import com.easy_station.management.users.domain.User;
 import lombok.*;
 
 @NoArgsConstructor
@@ -11,15 +12,15 @@ import lombok.*;
 @Setter
 public class UserDTO {
     private String id;
-    private String name;
+    private String email;
     private String companyId;
     private String externalId;
     private CompanyDTO company;
 
-    public UserDTO(String id, String name, String companyId) {
-        this.id = id;
-        this.name = name;
-        this.companyId = companyId;
+    public UserDTO(User user) {
+        this.id = user.getId();
+        this.email = user.getEmail();
+        this.companyId = user.getCompanyId();
     }
 
 }

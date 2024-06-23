@@ -133,7 +133,7 @@ class SSOControllerTest {
         verify(responseObserver).onCompleted();
 
         ValidateTokenResponse response = validateTokenCaptor.getValue();
-        assertEquals("email@easystation.com.br", response.getEmail());
+        assertEquals("email@easystation.com.br", response.getSubject());
     }
 
     @Test

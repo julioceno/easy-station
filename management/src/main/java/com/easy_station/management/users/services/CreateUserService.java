@@ -30,11 +30,7 @@ public class CreateUserService {
         User userCreated = createUser(userBuilt);
 
         logger.info("Return created user...");
-        return new UserDTO(
-                userCreated.getId(),
-                userCreated.getEmail(),
-                userCreated.getCompanyId()
-        );
+        return new UserDTO(userCreated);
     }
 
     private void throwIfUserAlreadyExists(String externalUserId) {

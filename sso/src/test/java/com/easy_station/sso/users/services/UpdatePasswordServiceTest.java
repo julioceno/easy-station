@@ -7,13 +7,11 @@ import com.easy_station.sso.users.domain.User;
 import com.easy_station.sso.users.dto.UpdatePasswordDTO;
 import com.easy_station.sso.users.dto.UserReturnDTO;
 import com.easy_station.sso.users.dto.UserRoleEnum;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
@@ -39,10 +37,12 @@ class UpdatePasswordServiceTest {
     User user;
     UpdatePasswordDTO dto = new UpdatePasswordDTO("oldPassword", "newPassword");
 
+
     @BeforeAll
     static void setUpBeforeAll() {
         mockStatic(BCrypt.class);
     }
+
 
     @BeforeEach
     void setUp() {

@@ -28,7 +28,6 @@ class FindOneCompanyServiceTest {
     CompanyRepository companyRepository;
 
     Company company = new Company("id", "name", 10.0, null, null, null);
-    CompanyDTO companyDTO = new CompanyDTO(company);
 
     @BeforeEach
     void setUp() {

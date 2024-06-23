@@ -3,9 +3,13 @@ package com.easy_station.management.common.grpc.dto;
 import br.com.easy_station.sso.Company;
 import br.com.easy_station.sso.Role;
 import br.com.easy_station.sso.User;
-import lombok.Getter;
+import lombok.*;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
 @Getter
+@EqualsAndHashCode(of = "id")
 public class UserReturnDTO {
     private String id;
     private String email;

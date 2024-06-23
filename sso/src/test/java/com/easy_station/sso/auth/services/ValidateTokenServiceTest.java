@@ -6,12 +6,11 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.easy_station.sso.exceptions.UnauthorizedException;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
+import org.mockito.MockedStatic;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.util.ReflectionTestUtils;
 
@@ -25,10 +24,18 @@ class ValidateTokenServiceTest {
     @InjectMocks
     private ValidateTokenService validateTokenService;
 
+    private static MockedStatic<JWT> jwtMock;
+
     @BeforeAll
     static void setUpBeforeAll() {
-        mockStatic(JWT.class);
+        jwtMock = mockStatic(JWT.class);
     }
+
+    @AfterAll
+    static void tearDownAfterAll() {
+        jwtMock.close();
+    }
+
 
     @BeforeEach
     void setUp() {
