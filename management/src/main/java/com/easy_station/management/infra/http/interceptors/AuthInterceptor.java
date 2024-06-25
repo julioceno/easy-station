@@ -43,7 +43,10 @@ public class AuthInterceptor implements HandlerInterceptor {
            SubjectDTO subjectDTO = ssoClientService.validateToken(token);
             logger.info(format("User %s is authenticated", subjectDTO.email()));
             validateRole(handler, subjectDTO.role());
-            setCompanyIdInRequest(token, request);
+
+            if (subjectDTO.role() == UserRoleEnum.USER) {
+                setCompanyIdInRequest(token, request);
+            }
 
             logger.info("Authorized user");
             return true;
