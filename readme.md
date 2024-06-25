@@ -36,6 +36,9 @@ Depois, rode o docker compose da aplicação:
 $ docker compose up -d
 ```
 
+
+**Lembre-se** de compilar as classes do grpc no projeto do sso e no do management também. 
+</br>
 **Lembre-se** de criar um usuario ADMIN para a partir dai criar usuarios comuns que poderão fazer parte das empresas.
 
 ## Arquitetura

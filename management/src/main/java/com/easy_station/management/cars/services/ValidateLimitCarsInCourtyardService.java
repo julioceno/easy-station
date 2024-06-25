@@ -37,7 +37,7 @@ public class ValidateLimitCarsInCourtyardService {
 
     private List<Car> getCars(String courtyardId, String companyId) {
         logger.info(format("Getting cars by courtyardId %s and companyId %s", courtyardId, companyId));
-        List<Car> cars = carRepository.findAllCarsByCourtyardIdAndCompanyId(courtyardId, companyId);
+        List<Car> cars = carRepository.findAllActiveCarsByCourtyardIdAndCompanyId(courtyardId, companyId);
         logger.info(format("%s cars found", cars.size()));
         return cars;
     }

@@ -17,7 +17,6 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
-import static org.assertj.core.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 class ValidateLimitCarsInCourtyardServiceTest {
@@ -49,13 +48,13 @@ class ValidateLimitCarsInCourtyardServiceTest {
     @DisplayName("Should call carRepository and invoke findAllCarsByCourtyardIdAndCompanyId method")
     void test2() {
         validateLimitCarsInCourtyardService.run("courtyardId", "companyId");
-        verify(carRepository).findAllCarsByCourtyardIdAndCompanyId("courtyardId", "companyId");
+        verify(carRepository).findAllActiveCarsByCourtyardIdAndCompanyId("courtyardId", "companyId");
     }
 
     @Test
     @DisplayName("should throw BadRequestException when has more cars than limit cars by courtyard")
     void test3() {
-        when(carRepository.findAllCarsByCourtyardIdAndCompanyId("courtyardId", "companyId")).thenReturn(Arrays.asList(car, car, car, car, car, car, car, car, car, car));
+        when(carRepository.findAllActiveCarsByCourtyardIdAndCompanyId("courtyardId", "companyId")).thenReturn(Arrays.asList(car, car, car, car, car, car, car, car, car, car));
         BadRequestException exception = assertThrows(BadRequestException.class, () -> {
             validateLimitCarsInCourtyardService.run("courtyardId", "companyId");
         });

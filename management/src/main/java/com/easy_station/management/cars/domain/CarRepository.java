@@ -37,8 +37,8 @@ public interface CarRepository extends JpaRepository<Car, String> {
             "select cars.* from cars \n" +
             "join courtyards ON cars.courtyard_id = courtyards.id  \n" +
             "join companies on courtyards.company_id = companies.id \n" +
-            "where courtyards.id = ?1 and companies.id = ?2" +
+            "where courtyards.id = ?1 and companies.id = ?2 and cars.updated_at is null " +
             "\n", nativeQuery = true
     )
-    List<Car> findAllCarsByCourtyardIdAndCompanyId(String courtyardId, String companyId);
+        List<Car> findAllActiveCarsByCourtyardIdAndCompanyId(String courtyardId, String companyId);
 }

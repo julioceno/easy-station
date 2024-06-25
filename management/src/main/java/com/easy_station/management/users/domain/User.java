@@ -3,6 +3,7 @@ package com.easy_station.management.users.domain;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.Date;
@@ -34,6 +35,7 @@ public class User {
     @Column(name = "created_at", nullable = false)
     private Date createdAt;
 
+    @LastModifiedDate
     @Column(name = "updated_at", nullable = false)
     private Date updatedAt;
 }
